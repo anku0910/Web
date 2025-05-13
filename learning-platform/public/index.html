@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>破繭而出！你的職業教育平台</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .cover-container {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      border-radius: 1rem;
+    }
+
+    .cover-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* 若要完整圖片用 contain */
+    }
+
+    .overlay-content {
+      position: absolute;
+      top: 50%;
+      right: 150px;
+      transform: translateY(-50%);
+      min-width: 220px;
+      text-align: center;
+    }
+
+    .text-shadow {
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="cover-container">
+          <img src="images/cover.png" alt="背景圖">
+          <div class="overlay-content">
+            <h2 class="fw-bold text-shadow mb-1">破繭而出！</h2>
+            <div class="border-bottom border-dark mx-auto" style="width: 80%; min-width: 20px;"></div>
+            <p class="fs-5 fw-bold mb-3">你的職業教育平台</p>
+            <a href="blank.html" class="btn btn-success btn-lg fw-bold px-5">開始</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>破繭而出！你的職業教育平台</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #d9f0d9;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .main-banner {
+      position: relative;
+      background-image: url('images/cover.png');
+      background-size: cover;
+      background-position: left center;
+      background-repeat: no-repeat;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      aspect-ratio: 16/10; /* 固定寬高比確保圖片不會被壓縮 */
+      width: 100%;
+      max-width: 1024px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    
+    .banner-content {
+      background: rgba(255,255,255,0.85);
+      border-radius: 16px;
+      padding: 2rem 2.5rem;
+      max-width: 420px;
+      margin-right: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .banner-content h2 {
+      font-size: 2.2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    
+    .banner-content p {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .banner-content .btn {
+      padding: 0.6rem 2rem;
+      font-weight: 600;
+    }
+    
+    /* 平板 */
+    @media (max-width: 768px) {
+      .main-banner {
+        aspect-ratio: 4/3; /* 在平板上改變寬高比 */
+      }
+      
+      .banner-content {
+        padding: 1.5rem 2rem;
+        margin-right: 1.5rem;
+      }
+      
+      .banner-content h2 {
+        font-size: 1.8rem;
+      }
+    }
+    
+    /* 手機 */
+    @media (max-width: 576px) {
+      .main-banner {
+        aspect-ratio: 1/1; /* 在手機上使用更接近正方形的寬高比 */
+        justify-content: center;
+      }
+      
+      .banner-content {
+        margin-right: 0;
+        padding: 1.2rem 1.5rem;
+        max-width: 85%; 
+      }
+      
+      .banner-content h2 {
+        font-size: 1.5rem;
+      }
+      
+      .banner-content p {
+        font-size: 1rem;
+        margin-bottom: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-banner">
+    <div class="banner-content">
+      <h2>破繭而出！</h2>
+      <p>你的職業教育平台</p>
+      <a href="blank.html" class="btn btn-success btn-lg">開始</a>
+    </div>
+  </div>
+</body>
+</html>

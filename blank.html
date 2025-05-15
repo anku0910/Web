@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>選擇課業</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #c08b5c; /* 棕色背景 */
+      background-image: linear-gradient(to bottom, #c08b5c 70%, #5c8d76 30%); /* 棕色漸變到綠色 */
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .main-card {
+      background-color: #fef9d7; /* 淺黃色背景 */
+      border-radius: 30px;
+      border: 8px solid #c27b30; /* 棕色邊框 */
+      padding: 30px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      max-width: 900px;
+      width: 100%;
+    }
+    
+    .title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .subtitle {
+      font-size: 2rem;
+      padding: 8px 0;
+      position: relative;
+      display: inline-block;
+      border-top: 2px solid #333;
+      border-bottom: 2px solid #333;
+      margin-bottom: 30px;
+    }
+    
+    .option-btn {
+      background-color: white;
+      border: 3px solid #c27b30; /* 棕色邊框 */
+      border-radius: 30px;
+      padding: 14px 30px;
+      margin-bottom: 15px;
+      width: 100%;
+      font-size: 1.2rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    
+    .option-btn:hover {
+      background-color: #ffecb3;
+    }
+    
+    .cat-container {
+      background-color: #fef2cc; /* 淺黃色背景 */
+      border: 12px solid #daa520; /* 金色邊框 */
+      border-radius: 30px;
+      overflow: hidden;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    @media (max-width: 768px) {
+      .title {
+        font-size: 2rem;
+      }
+      .subtitle {
+        font-size: 1.6rem;
+      }
+      .cat-container {
+        height: 180px;
+        margin-top: 20px;
+      }
+      .option-btn {
+        padding: 10px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-card">
+    <div class="row">
+      <div class="col-md-7">
+        <div class="text-center mb-4">
+          <h1 class="title">你想學甚麼？</h1>
+          <h2 class="subtitle">IT人員</h2>
+        </div>
+        
+        <div class="mb-4">
+          <button class="option-btn mb-3">電腦軟體應用丙級</button>
+          <button class="option-btn mb-3">電腦硬體裝修丙級</button>
+          <button class="option-btn mb-3">電腦軟體設計丙級</button>
+        </div>
+        
+        <div class="text-center">
+          <button class="btn btn-success btn-lg rounded-pill px-5 fw-bold">確認</button>
+        </div>
+      </div>
+      
+      <div class="col-md-5 d-flex align-items-center justify-content-center">
+        <div class="cat-container">
+          <!-- 這裡放置貓咪圖片 -->
+          <img src="images/2/Cat2.png" alt="引導貓咪" style="max-width: 100%; max-height: 200px;">
+          <!-- 如果沒有圖片可以先用下面的 div 代替 -->
+          <!-- <div class="text-center p-3">這裡放置貓咪圖片</div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

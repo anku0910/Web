@@ -12,8 +12,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin: 0;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* 加上陰影 */
+      border-radius: 10px; /* 可選：讓邊界更柔和 */
     }
-    
+    .container {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); /* 如果只想針對內容容器加陰影 */
+    border-radius: 80px; /* 可選：讓邊界更柔和 */
+  }
     .cover-container {
       position: relative;
       height: 600px;
@@ -50,6 +56,35 @@
       justify-content: left;
       margin-left: -60px; /* 增加負的外邊距，讓容器更靠左 */
     }
+      .custom-btn {
+    margin-left: 20px;
+    background-color: rgb(107, 172, 101);
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-left: 0px;
+    height: 60px;
+  }
+
+  .custom-btn:focus {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    outline: none;
+  }
+
+  .custom-btn:blur {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .custom-btn:hover {
+    background-color: rgb(85, 140, 80);
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.4);
+  }
   </style>
 </head>
 <body>
@@ -71,7 +106,9 @@
               <img src="images/1/破繭而出！.png" alt="破繭而出！" style="max-width: 100%; height: auto;margin-left: -40px;">
                <img src="images/1/Vector.png" alt="Vector" style="max-width: 100%; height: auto;margin-left: -40px;">
               <img src="images/1/你的職業教育平台.png" alt="你的職業教育平台" style="max-width: 100%; height: auto; margin-left: -40px;" class="mb-3">
-              <a href="blank.html" class="btn btn-success btn-lg fw-bold px-5" style="margin-left: 30px;">開始</a>
+                <a href="blank.html" class="btn btn-lg fw-bold px-5 custom-btn">
+                 <img src="images/1/開始.png" alt="開始">
+                </a>
             </div>
           </div>
         </div>

@@ -17,6 +17,7 @@
       border-radius: 10px; /* 可選：讓邊界更柔和 */
     }
     .container {
+      background: linear-gradient(90deg, rgb(186, 219, 152), rgb(155, 208, 176));
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); /* 如果只想針對內容容器加陰影 */
     border-radius: 80px; /* 可選：讓邊界更柔和 */
   }
@@ -48,7 +49,7 @@
     .cat-container {
       background-color: #fef2cc; /* 淺黃色背景 */
       border: 12px solid #6bac65; /* 綠色邊框 */
-      border-radius: 30px;
+      border-radius: 50px;
       overflow: hidden;
       max-width: 200px; /* 增加圖片的最大高度 */
       display: flex;
@@ -60,30 +61,22 @@
     margin-left: 20px;
     background-color: rgb(107, 172, 101);
     color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
     border: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0;
-    font-weight: bold;
-    font-size: 1.25rem;
-    margin-left: 0px;
+    margin-left: -18px;
     height: 60px;
   }
-
-  .custom-btn:focus {
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    outline: none;
-  }
-
   .custom-btn:blur {
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.4);
   }
 
   .custom-btn:hover {
-    background-color: rgb(85, 140, 80);
-    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.4);
+    background-color: rgba(101, 190, 92, 0.8);
+    box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.4);
   }
   </style>
 </head>
@@ -107,7 +100,7 @@
                <img src="images/1/Vector.png" alt="Vector" style="max-width: 100%; height: auto;margin-left: -40px;">
               <img src="images/1/你的職業教育平台.png" alt="你的職業教育平台" style="max-width: 100%; height: auto; margin-left: -40px;" class="mb-3">
                 <a href="blank.html" class="btn btn-lg fw-bold px-5 custom-btn">
-                 <img src="images/1/開始.png" alt="開始">
+                 <img src="images/1/開始.png" alt="開始" style="max-width: 60%; height: auto; ">
                 </a>
             </div>
           </div>

@@ -17,7 +17,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
     }
 
 
@@ -28,7 +27,6 @@
       max-width: 900px;
       width: 100%;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
     }
 
     .bg-image {
@@ -251,7 +249,7 @@
         </div>
 
         <div class="text-center">
-          <button class="confirm-btn">確認</button>
+            <button class="confirm-btn" id="confirm-btn">確認</button>
         </div>
       </div>
 
@@ -264,6 +262,25 @@
     </div>
   </div>
 
+  <!-- 轉場特效遮罩 -->
+<div id="transition-overlay" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:radial-gradient(circle at 50% 50%, #b6db98 0%, #9bd0b0 100%);opacity:1;pointer-events:auto;z-index:9999;transition:opacity 0.7s;">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+    <svg width="80" height="80" viewBox="0 0 50 50">
+      <circle cx="25" cy="25" r="20" stroke="#6bac65" stroke-width="5" fill="none" stroke-linecap="round">
+        <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
+  </div>
+</div>
+<script>
+  window.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+      const overlay = document.getElementById('transition-overlay');
+      overlay.style.opacity = '0';
+      overlay.style.pointerEvents = 'none';
+    }, 700);
+  });
+</script>
   <script>
     // 等待 DOM 載入完成
     document.addEventListener('DOMContentLoaded', () => {
@@ -313,6 +330,17 @@
     });
 
 
+  </script>
+  <script>
+    document.getElementById('confirm-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    const overlay = document.getElementById('transition-overlay');
+    overlay.style.pointerEvents = 'auto';
+    overlay.style.opacity = '1';
+    setTimeout(function() {
+      window.location.href = 'Main.html';
+    }, 700);
+  });
   </script>
 </body>
 

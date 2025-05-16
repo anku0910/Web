@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>軟體應用丙級主畫面</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #c08b5c;
+      background-image: url("images/2/bg1.png");
+      background-position: center;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .main-card {
+      position: relative;
+      border-radius: 60px;
+      padding: 20px 0 20px 0;
+      max-width: 1400px;
+      width: 100%;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      background: #fff8e1;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+    }
+    .sidebar, .rightbar {
+      background: #e08a3d;
+      border-radius: 40px;
+      padding: 20px 10px;
+      min-width: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+    }
+    .sidebar {
+      margin-left: 10px;
+      width: 200px;
+    }
+    .rightbar {
+      margin-right: 10px;
+      width: 220px;
+    }
+    .sidebar .logo {
+      width: 60px;
+      height: 60px;
+      background: #fff;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sidebar .logo img {
+      width: 40px;
+      height: 40px;
+    }
+    .sidebar .nav-btn, .sidebar .nav-btn2 {
+      background: #fff;
+      color: #a34928;
+      border: none;
+      border-radius: 20px;
+      width: 100%;
+      padding: 10px 0;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+      transition: background 0.2s;
+    }
+    .sidebar .nav-btn2 {
+      background: #fff;
+      color: #e08a3d;
+      border-radius: 16px;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .sidebar .nav-btn:hover, .sidebar .nav-btn2:hover {
+      background: #ffe0b2;
+    }
+    .sidebar .section-title {
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin: 10px 0 4px 0;
+      letter-spacing: 2px;
+    }
+    .main-content {
+      flex: 1;
+      padding: 20px 0 20px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 0;
+    }
+    .main-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .main-header .arrow-btn {
+      background: #fff;
+      border: 2px solid #e08a3d;
+      border-radius: 12px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #e08a3d;
+      font-weight: bold;
+      margin: 0 10px;
+    }
+    .main-header .main-title {
+      font-size: 2.7rem;
+      font-weight: bold;
+      color: #fff;
+      background: #e08a3d;
+      border-radius: 18px;
+      padding: 0 30px;
+      letter-spacing: 4px;
+      font-family: 'Poppins', sans-serif;
+      box-shadow: 0 2px 8px #e08a3d44;
+    }
+    .main-header .challenge-btn, .main-header .bell-btn {
+      background: #fff;
+      border: 2px solid #e08a3d;
+      border-radius: 16px;
+      width: 60px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #e08a3d;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .main-header .bell-btn {
+      font-size: 1.5rem;
+    }
+    .lesson-list {
+      width: 100%;
+      max-width: 700px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      margin: 0 auto 20px auto;
+    }
+    .lesson-card {
+      background: #f9fbe7;
+      border: 3px solid #e08a3d;
+      border-radius: 24px;
+      padding: 18px 24px 12px 24px;
+      box-shadow: 0 2px 8px #e08a3d22;
+      position: relative;
+    }
+    .lesson-card .lesson-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 6px;
+    }
+    .lesson-card .lesson-desc {
+      color: #444;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+    .lesson-card .lesson-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.95rem;
+      color: #888;
+    }
+    .lesson-card .lesson-meta .level {
+      color: #e08a3d;
+      font-weight: bold;
+      margin-left: 8px;
+    }
+    .lesson-card .lesson-btn {
+      background: #e08a3d;
+      color: #fff;
+      border: none;
+      border-radius: 16px;
+      padding: 4px 24px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-top: 6px;
+      transition: background 0.2s;
+    }
+    .lesson-card .lesson-btn:hover {
+      background: #ffb74d;
+      color: #fff;
+    }
+    .progress-bar {
+      width: 90%;
+      height: 18px;
+      background: #fff;
+      border-radius: 12px;
+      border: 2px solid #e08a3d;
+      margin: 0 auto 10px auto;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      background: #e08a3d;
+      border-radius: 12px 0 0 12px;
+      width: 40%;
+      transition: width 0.5s;
+    }
+    .rightbar .unit-btn {
+      background: #fff;
+      color: #e08a3d;
+      border: none;
+      border-radius: 18px;
+      width: 100%;
+      padding: 10px 0;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      transition: background 0.2s;
+    }
+    .rightbar .unit-btn:hover {
+      background: #ffe0b2;
+    }
+    .rightbar .section-title {
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin: 10px 0 4px 0;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+    .rightbar .group-btn {
+      background: #fff;
+      color: #e08a3d;
+      border: none;
+      border-radius: 16px;
+      width: 100%;
+      padding: 8px 0;
+      font-size: 1.05rem;
+      font-weight: bold;
+      margin-bottom: 6px;
+      transition: background 0.2s;
+    }
+    .rightbar .group-btn:hover {
+      background: #ffe0b2;
+    }
+    .rightbar .ad {
+      background: #e0e0e0;
+      color: #888;
+      border-radius: 12px;
+      width: 100%;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 18px;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-card">
+    <!-- 側邊欄 -->
+    <div class="sidebar">
+      <div class="logo"><img src="images/1/Cat1.png" alt="logo"></div>
+      <div style="font-size:1.2rem;font-weight:bold;margin-bottom:10px;">旅行中</div>
+      <button class="nav-btn">首頁</button>
+      <button class="nav-btn">筆記</button>
+      <button class="nav-btn">我的課程</button>
+      <button class="nav-btn">學習紀錄</button>
+      <div class="section-title">個人檔案</div>
+      <button class="nav-btn2">任務</button>
+      <button class="nav-btn2">旅行</button>
+      <button class="nav-btn2">徽章</button>
+      <button class="nav-btn2">物品庫</button>
+    </div>
+    <!-- 主內容 -->
+    <div class="main-content">
+      <div class="main-header">
+        <button class="arrow-btn">&#8592;</button>
+        <span class="main-title">軟體應用丙級</span>
+        <button class="arrow-btn">&#8594;</button>
+        <button class="challenge-btn">挑戰</button>
+        <button class="bell-btn">&#128276;</button>
+      </div>
+      <div class="lesson-list">
+        <div class="lesson-card">
+          <div class="lesson-title">電腦基礎概念與操作</div>
+          <div class="lesson-desc">介紹個人電腦的基本架構與組成，包含，桌面操作、輸入輸出設備、檔案類型、資料傳輸速度基本功能等。適合無基礎學員，建立使用電腦的基本技能和知識。</div>
+          <div class="lesson-meta">
+            <span>● 課程 初學者級</span>
+            <button class="lesson-btn">上課</button>
+          </div>
+        </div>
+        <div class="lesson-card">
+          <div class="lesson-title">作業系統與檔案管理</div>
+          <div class="lesson-desc">介紹不同作業系統的架構與功能、使用者權限，學習如何管理檔案與資料夾，理解檔案系統的運作原理，並實務操作常用的檔案管理工具。</div>
+          <div class="lesson-meta">
+            <span>● 課程 初學者至新手級</span>
+            <button class="lesson-btn">上課</button>
+          </div>
+        </div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-bar-inner" style="width:40%"></div>
+      </div>
+    </div>
+    <!-- 右側欄 -->
+    <div class="rightbar">
+      <button class="unit-btn">切換單元</button>
+      <div class="section-title">社群</div>
+      <button class="group-btn">單元討論區</button>
+      <button class="group-btn">作品</button>
+      <button class="group-btn">好友</button>
+      <button class="group-btn">社群小組</button>
+      <button class="group-btn">排行榜</button>
+      <button class="group-btn">AI學伴</button>
+      <div class="ad">廣告</div>
+    </div>
+  </div>
+</body>
+</html>

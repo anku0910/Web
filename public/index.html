@@ -99,7 +99,7 @@
               <img src="images/1/破繭而出！.png" alt="破繭而出！" style="max-width: 100%; height: auto;margin-left: -40px;">
                <img src="images/1/Vector.png" alt="Vector" style="max-width: 100%; height: auto;margin-left: -40px;">
               <img src="images/1/你的職業教育平台.png" alt="你的職業教育平台" style="max-width: 100%; height: auto; margin-left: -40px;" class="mb-3">
-                <a href="blank.html" class="btn btn-lg fw-bold px-5 custom-btn">
+                <a href="#" id="start-btn" class="btn btn-lg fw-bold px-5 custom-btn">
                  <img src="images/1/開始.png" alt="開始" style="max-width: 60%; height: auto; ">
                 </a>
             </div>
@@ -109,4 +109,25 @@
     </div>
   </div>
 </body>
+<!-- 轉場特效遮罩 -->
+<div id="transition-overlay" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:radial-gradient(circle at 50% 50%, #b6db98 0%, #9bd0b0 100%);opacity:0;pointer-events:none;z-index:9999;transition:opacity 0.7s;">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+    <svg width="80" height="80" viewBox="0 0 50 50">
+      <circle cx="25" cy="25" r="20" stroke="#6bac65" stroke-width="5" fill="none" stroke-linecap="round">
+        <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
+  </div>
+</div>
+<script>
+  document.getElementById('start-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    const overlay = document.getElementById('transition-overlay');
+    overlay.style.pointerEvents = 'auto';
+    overlay.style.opacity = '1';
+    setTimeout(function() {
+      window.location.href = 'blank.html';
+    }, 700);
+  });
+</script>
 </html>

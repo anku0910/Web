@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>數位技能RPG教室</title>
+<style>
+  :root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --hover-effect: drop-shadow(0 0 8px rgba(52,152,219,0.4));
+  }
+  
+  body {
+    font-family: 'Segoe UI', system-ui;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    padding: 2rem;
+    animation: bg-pulse 20s infinite alternate;
+  }
+
+  @keyframes bg-pulse {
+    0% { background-size: 100% 100%; }
+    100% { background-size: 120% 120%; }
+  }
+
+  .game-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: rgba(255,255,255,0.95);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .npc-avatar {
+    width: 120px;
+    height: 120px;
+    background: url('data:image/svg+xml;utf8,<svg>...</svg>') no-repeat;
+    float: left;
+    margin-right: 1.5rem;
+    filter: var(--hover-effect);
+    transition: transform 0.3s;
+  }
+
+  .dialogue-box {
+    background: #f8f9fa;
+    border-left: 4px solid var(--secondary-color);
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+    position: relative;
+  }
+
+  .options-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .option-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .option-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(52,152,219,0.3);
+  }
+
+  .progress-bar {
+    height: 8px;
+    background: #eee;
+    border-radius: 4px;
+    margin: 1rem 0;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--secondary-color);
+    width: 0%;
+    transition: width 0.5s ease;
+  }
+
+  @media (max-width: 600px) {
+    .npc-avatar {
+      float: none;
+      margin: 0 auto 1rem;
+      display: block;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- 課程1: 了解檔案類型 -->
+<div class="game-container" id="course1">
+  <div class="npc-avatar"></div>
+  <div class="dialogue-box">
+    <h2>📁 檔案類型探索任務</h2>
+    <p id="dialogue1">歡迎來到數位森林！我是你的導航精靈，讓我們一起探索檔案類型的秘密吧！</p>
+    <div class="options-grid" id="options1">
+      <button class="option-btn" onclick="startLesson(1, '圖片檔')">探索圖片王國</button>
+      <button class="option-btn" onclick="startLesson(1, '文件檔')">解密文件城堡</button>
+      <button class="option-btn" onclick="startLesson(1, '音訊檔')">聆聽聲音秘境</button>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress1"></div>
+    </div>
+    <div id="result1" class="result-box"></div>
+  </div>
+</div>
+
+<!-- 課程2: 輸入設備探險 -->
+<div class="game-container" id="course2">
+  <div class="npc-avatar" style="background-image:url('data:image/svg+xml;utf8,<svg>...</svg>')"></div>
+  <div class="dialogue-box">
+    <h2>🖱️ 設備探索任務</h2>
+    <p id="dialogue2">準備好成為設備大師了嗎？選擇你的探險工具！</p>
+    <div class="options-grid" id="options2">
+      <button class="option-btn" onclick="startLesson(2, '滑鼠')">滑鼠操控術</button>
+      <button class="option-btn" onclick="startLesson(2, '鍵盤')">鍵盤秘技</button>
+      <button class="option-btn" onclick="startLesson(2, '觸控螢幕')">觸控魔法</button>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress2"></div>
+    </div>
+    <div id="result2" class="result-box"></div>
+  </div>
+</div>
+
+<script>
+const lessons = {
+  1: {
+    '圖片檔': {
+      steps: [
+        { text: '發現.jpg精靈！它最擅長保存照片', progress: 33 },
+        { text: '遇到.png守護者！透明背景的秘密', progress: 66 },
+        { text: '解鎖.gif寶箱！動畫魔法啟動！', progress: 100 }
+      ]
+    },
+    // 其他檔案類型課程...
+  },
+  2: {
+    '滑鼠': {
+      steps: [
+        { text: '掌握左鍵點擊術！', progress: 25 },
+        { text: '學習右鍵召喚選單', progress: 50 },
+        { text: '滾輪捲動秘技解鎖', progress: 75 },
+        { text: '雙擊速度訓練完成！', progress: 100 }
+      ]
+    },
+    // 其他設備課程...
+  }
+};
+
+function startLesson(courseId, topic) {
+  const course = lessons[courseId][topic];
+  let currentStep = 0;
+  
+  const updateProgress = () => {
+    document.getElementById(`progress${courseId}`).style.width = 
+      `${course.steps[currentStep].progress}%`;
+    document.getElementById(`result${courseId}`).innerHTML = `
+      <div class="step-animation">
+        <p>${course.steps[currentStep].text}</p>
+      </div>
+    `;
+    
+    if (++currentStep < course.steps.length) {
+      setTimeout(updateProgress, 1500);
+    }
+  };
+  
+  updateProgress();
+}
+</script>
+
+</body>
+</html>

@@ -28,11 +28,12 @@
       border-radius: 80px;
       padding: 0;
       max-width: 1280px;
+      max-height: 720px;
       width: 100vw;
       min-width: 1200px;
       box-shadow: 0 8px 32px 8px #a3492844;
       background: #fff8e1;
-      min-height: 98vh;
+      min-height: 96vh;
       display: flex;
       flex-direction: row;
       gap: 0;
@@ -56,6 +57,7 @@
     }
 
     .sidebar {
+      z-index: 2;
       margin-left: 0;
       width: 210px;
       border-top-left-radius: 60px;
@@ -67,8 +69,9 @@
     }
 
     .rightbar {
+      z-index: 2;
       margin-right: 0;
-      width: 240px;
+      width: 210px;
       border-top-right-radius: 60px;
       border-bottom-right-radius: 60px;
       border-top-left-radius: 0px;
@@ -335,6 +338,7 @@
     }
 
     .rightbar .unit-btn {
+      z-index: 2;
       background: #fff;
       color: #e08a3d;
       border: none;
@@ -354,6 +358,7 @@
     }
 
     .rightbar .section-title {
+      z-index: 1;
       color: #fff;
       font-size: 1.18rem;
       font-weight: bold;
@@ -364,6 +369,7 @@
     }
 
     .rightbar .group-btn {
+       z-index: 1;
       background: #fff;
       color: #e08a3d;
       border: none;
@@ -429,6 +435,14 @@
       box-shadow: 0 2px 8px #e08a3d22;
       letter-spacing: 2px;
     }
+    .ball {
+      z-index: 1;
+      width: 50px;
+      height: 70px;
+      background: #e08a3d;
+      border-radius: 100px;
+      display: inline-block;
+    }
   </style>
 </head>
 
@@ -454,12 +468,14 @@
         <button class="arrow-btn">←</button>
         <span class="main-title">軟體應用丙級</span>
         <button class="arrow-btn">→</button>
-        <div class="right-btn-group">
+        <div class="right-btn-group" style="z-index: 2;" >
           <button class="challenge-btn">挑戰</button>
           <button class="bell-btn">🔔</button>
         </div>
       </div>
       <div class="main-content">
+        <div class="ball" style="position:absolute;top: 80px;left:180px;"></div>
+        <div class="ball" style="position:absolute;top:80px;right:180px;"></div>
         <div class="lesson-list">
           <div class="lesson-card">
             <div class="lesson-title">電腦基礎概念與操作</div>

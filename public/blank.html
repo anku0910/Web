@@ -140,6 +140,39 @@
       background-color: #ffecb3;
     }
 
+    .option-btn.disabled-btn {
+      position: relative;
+      pointer-events: none;
+      /* 禁用按鈕功能 */
+      color: gray;
+      /* 可選：文字變灰表示不可用 */
+    }
+
+    .option-btn.disabled-btn::after {
+      content: '待開發';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      /* 半透明背景 */
+      color: white;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 1rem;
+      pointer-events: none;
+      /* 確保文字不影響滑鼠事件 */
+    }
+
+    .option-btn.disabled-btn:hover,
+    .option-btn.disabled-btn:focus {
+      background-color: white;
+      /* 移除 hover/focus 效果 */
+      border-color: #a34928;
+      cursor: default;
+      /* 游標改為預設 */
+    }
+
     .confirm-btn {
       font-family: 'Poppins', sans-serif;
       font-weight: bold;
@@ -244,12 +277,12 @@
 
         <div class="center-buttons">
           <button class="option-btn">電腦軟體應用丙級</button>
-          <button class="option-btn">電腦硬體裝修丙級</button>
-          <button class="option-btn">電腦軟體設計丙級</button>
+          <button class="option-btn disabled-btn">電腦硬體裝修丙級</button>
+          <button class="option-btn disabled-btn">電腦軟體設計丙級</button>
         </div>
 
         <div class="text-center">
-            <button class="confirm-btn" id="confirm-btn">確認</button>
+          <button class="confirm-btn" id="confirm-btn">確認</button>
         </div>
       </div>
 
@@ -263,24 +296,26 @@
   </div>
 
   <!-- 轉場特效遮罩 -->
-<div id="transition-overlay" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:radial-gradient(circle at 50% 50%, #b6db98 0%, #9bd0b0 100%);opacity:1;pointer-events:auto;z-index:9999;transition:opacity 0.7s;">
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
-    <svg width="80" height="80" viewBox="0 0 50 50">
-      <circle cx="25" cy="25" r="20" stroke="#6bac65" stroke-width="5" fill="none" stroke-linecap="round">
-        <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/>
-      </circle>
-    </svg>
+  <div id="transition-overlay"
+    style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:radial-gradient(circle at 50% 50%, #b6db98 0%, #9bd0b0 100%);opacity:1;pointer-events:auto;z-index:9999;transition:opacity 0.7s;">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+      <svg width="80" height="80" viewBox="0 0 50 50">
+        <circle cx="25" cy="25" r="20" stroke="#6bac65" stroke-width="5" fill="none" stroke-linecap="round">
+          <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s"
+            repeatCount="indefinite" />
+        </circle>
+      </svg>
+    </div>
   </div>
-</div>
-<script>
-  window.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
-      const overlay = document.getElementById('transition-overlay');
-      overlay.style.opacity = '0';
-      overlay.style.pointerEvents = 'none';
-    }, 700);
-  });
-</script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      setTimeout(function () {
+        const overlay = document.getElementById('transition-overlay');
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+      }, 700);
+    });
+  </script>
   <script>
     // 等待 DOM 載入完成
     document.addEventListener('DOMContentLoaded', () => {
@@ -332,15 +367,15 @@
 
   </script>
   <script>
-    document.getElementById('confirm-btn').addEventListener('click', function(e) {
-    e.preventDefault();
-    const overlay = document.getElementById('transition-overlay');
-    overlay.style.pointerEvents = 'auto';
-    overlay.style.opacity = '1';
-    setTimeout(function() {
-      window.location.href = 'Main.html';
-    }, 700);
-  });
+    document.getElementById('confirm-btn').addEventListener('click', function (e) {
+      e.preventDefault();
+      const overlay = document.getElementById('transition-overlay');
+      overlay.style.pointerEvents = 'auto';
+      overlay.style.opacity = '1';
+      setTimeout(function () {
+        window.location.href = 'Main.html';
+      }, 700);
+    });
   </script>
 </body>
 

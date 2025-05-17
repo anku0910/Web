@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
   <meta charset="UTF-8" />
   <title>軟體應用丙級主畫面</title>
@@ -17,6 +18,7 @@
       align-items: center;
       justify-content: center;
     }
+
     .main-card {
       position: relative;
       border-radius: 60px;
@@ -30,7 +32,9 @@
       flex-direction: row;
       gap: 10px;
     }
-    .sidebar, .rightbar {
+
+    .sidebar,
+    .rightbar {
       background: #e08a3d;
       border-radius: 40px;
       padding: 20px 10px;
@@ -42,14 +46,17 @@
       color: #fff;
       font-family: 'Poppins', sans-serif;
     }
+
     .sidebar {
       margin-left: 10px;
       width: 200px;
     }
+
     .rightbar {
       margin-right: 10px;
       width: 220px;
     }
+
     .sidebar .logo {
       width: 60px;
       height: 60px;
@@ -60,11 +67,14 @@
       align-items: center;
       justify-content: center;
     }
+
     .sidebar .logo img {
       width: 40px;
       height: 40px;
     }
-    .sidebar .nav-btn, .sidebar .nav-btn2 {
+
+    .sidebar .nav-btn,
+    .sidebar .nav-btn2 {
       background: #fff;
       color: #a34928;
       border: none;
@@ -76,6 +86,7 @@
       margin-bottom: 8px;
       transition: background 0.2s;
     }
+
     .sidebar .nav-btn2 {
       background: #fff;
       color: #e08a3d;
@@ -83,9 +94,12 @@
       font-size: 1rem;
       margin-bottom: 4px;
     }
-    .sidebar .nav-btn:hover, .sidebar .nav-btn2:hover {
+
+    .sidebar .nav-btn:hover,
+    .sidebar .nav-btn2:hover {
       background: #ffe0b2;
     }
+
     .sidebar .section-title {
       color: #fff;
       font-size: 1.1rem;
@@ -93,6 +107,7 @@
       margin: 10px 0 4px 0;
       letter-spacing: 2px;
     }
+
     .main-content {
       flex: 1;
       padding: 20px 0 20px 0;
@@ -101,13 +116,24 @@
       align-items: center;
       min-width: 0;
     }
+
     .main-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+  padding-right: 20px; /* 預留空間 */
+}
+
+/* 讓右側按鈕群推到最右 */
+.right-btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-left: auto; /* 自動推到最右 */
+}
+
     .main-header .arrow-btn {
       background: #fff;
       border: 2px solid #e08a3d;
@@ -122,6 +148,7 @@
       font-weight: bold;
       margin: 0 10px;
     }
+
     .main-header .main-title {
       font-size: 2.7rem;
       font-weight: bold;
@@ -133,7 +160,9 @@
       font-family: 'Poppins', sans-serif;
       box-shadow: 0 2px 8px #e08a3d44;
     }
-    .main-header .challenge-btn, .main-header .bell-btn {
+
+    .main-header .challenge-btn,
+    .main-header .bell-btn {
       background: #fff;
       border: 2px solid #e08a3d;
       border-radius: 16px;
@@ -147,9 +176,11 @@
       font-weight: bold;
       margin-left: 10px;
     }
+
     .main-header .bell-btn {
       font-size: 1.5rem;
     }
+
     .lesson-list {
       width: 100%;
       max-width: 700px;
@@ -158,6 +189,7 @@
       gap: 30px;
       margin: 0 auto 20px auto;
     }
+
     .lesson-card {
       background: #f9fbe7;
       border: 3px solid #e08a3d;
@@ -166,17 +198,20 @@
       box-shadow: 0 2px 8px #e08a3d22;
       position: relative;
     }
+
     .lesson-card .lesson-title {
       font-size: 1.3rem;
       font-weight: bold;
       color: #222;
       margin-bottom: 6px;
     }
+
     .lesson-card .lesson-desc {
       color: #444;
       font-size: 1.05rem;
       margin-bottom: 8px;
     }
+
     .lesson-card .lesson-meta {
       display: flex;
       align-items: center;
@@ -184,11 +219,13 @@
       font-size: 0.95rem;
       color: #888;
     }
+
     .lesson-card .lesson-meta .level {
       color: #e08a3d;
       font-weight: bold;
       margin-left: 8px;
     }
+
     .lesson-card .lesson-btn {
       background: #e08a3d;
       color: #fff;
@@ -200,10 +237,12 @@
       margin-top: 6px;
       transition: background 0.2s;
     }
+
     .lesson-card .lesson-btn:hover {
       background: #ffb74d;
       color: #fff;
     }
+
     .progress-bar {
       width: 90%;
       height: 18px;
@@ -214,6 +253,7 @@
       overflow: hidden;
       position: relative;
     }
+
     .progress-bar-inner {
       height: 100%;
       background: #e08a3d;
@@ -221,6 +261,7 @@
       width: 40%;
       transition: width 0.5s;
     }
+
     .rightbar .unit-btn {
       background: #fff;
       color: #e08a3d;
@@ -233,9 +274,11 @@
       margin-bottom: 10px;
       transition: background 0.2s;
     }
+
     .rightbar .unit-btn:hover {
       background: #ffe0b2;
     }
+
     .rightbar .section-title {
       color: #fff;
       font-size: 1.1rem;
@@ -244,6 +287,7 @@
       letter-spacing: 2px;
       text-align: center;
     }
+
     .rightbar .group-btn {
       background: #fff;
       color: #e08a3d;
@@ -256,9 +300,11 @@
       margin-bottom: 6px;
       transition: background 0.2s;
     }
+
     .rightbar .group-btn:hover {
       background: #ffe0b2;
     }
+
     .rightbar .ad {
       background: #e0e0e0;
       color: #888;
@@ -273,6 +319,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="main-card">
     <!-- 側邊欄 -->
@@ -295,8 +342,10 @@
         <button class="arrow-btn">&#8592;</button>
         <span class="main-title">軟體應用丙級</span>
         <button class="arrow-btn">&#8594;</button>
-        <button class="challenge-btn">挑戰</button>
-        <button class="bell-btn">&#128276;</button>
+        <div class="right-btn-group">
+          <button class="challenge-btn">挑戰</button>
+          <button class="bell-btn">&#128276;</button>
+        </div>
       </div>
       <div class="lesson-list">
         <div class="lesson-card">
@@ -334,4 +383,5 @@
     </div>
   </div>
 </body>
+
 </html>

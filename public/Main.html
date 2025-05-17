@@ -17,62 +17,84 @@
       background-size: cover;
       min-height: 100vh;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: stretch;
+      justify-content: stretch;
+      margin: 0;
+      padding: 0;
     }
 
     .main-card {
       position: relative;
-      border-radius: 60px;
-      padding: 20px 0 20px 0;
-      max-width: 1400px;
-      width: 100%;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-radius: 80px;
+      padding: 0;
+      max-width: 1280px;
+      width: 100vw;
+      min-width: 1200px;
+      box-shadow: 0 8px 32px 8px #a3492844;
       background: #fff8e1;
-      min-height: 90vh;
+      min-height: 98vh;
       display: flex;
       flex-direction: row;
-      gap: 10px;
+      gap: 0;
+      border: 6px solid #e08a3d;
+      margin: 10px auto;
     }
 
     .sidebar,
     .rightbar {
       background: #e08a3d;
-      border-radius: 40px;
-      padding: 20px 10px;
-      min-width: 180px;
+      border-radius: 36px;
+      padding: 18px 8px;
+      min-width: 170px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       color: #fff;
       font-family: 'Poppins', sans-serif;
+      box-shadow: 2px 0 12px #a3492833 inset;
     }
 
     .sidebar {
-      margin-left: 10px;
-      width: 200px;
+      margin-left: 0;
+      width: 210px;
+      border-top-left-radius: 60px;
+      border-bottom-left-radius: 60px;
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+      box-shadow: 4px 0 12px #a3492833;
+      padding-top: 28px;
     }
 
     .rightbar {
-      margin-right: 10px;
-      width: 220px;
+      margin-right: 0;
+      width: 240px;
+      border-top-right-radius: 60px;
+      border-bottom-right-radius: 60px;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      box-shadow: -4px 0 12px #a3492833;
+      padding-top: 28px;
     }
 
     .sidebar .logo {
-      width: 60px;
-      height: 60px;
-      background: #fff;
+      width: 100px;
+      height: 70px;
+      background: #d3ecf5;
       border-radius: 20px;
       margin-bottom: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 2px 8px #e08a3d44;
+      border: 2px solid #e08a3d;
+      overflow: hidden;
     }
 
     .sidebar .logo img {
-      width: 40px;
-      height: 40px;
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
     }
 
     .sidebar .nav-btn,
@@ -82,75 +104,86 @@
       border: none;
       border-radius: 20px;
       width: 100%;
-      padding: 10px 0;
-      font-size: 1.2rem;
+      padding: 14px 0;
+      font-size: 1.25rem;
       font-weight: bold;
-      margin-bottom: 8px;
-      transition: background 0.2s;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 6px #e08a3d22;
+      transition: background 0.2s, color 0.2s;
+      letter-spacing: 2px;
     }
 
     .sidebar .nav-btn2 {
       background: #fff;
       color: #e08a3d;
       border-radius: 16px;
-      font-size: 1rem;
-      margin-bottom: 4px;
+      font-size: 1.08rem;
+      margin-bottom: 6px;
+      padding: 10px 0;
     }
 
     .sidebar .nav-btn:hover,
     .sidebar .nav-btn2:hover {
       background: #ffe0b2;
+      color: #a34928;
     }
 
     .sidebar .section-title {
       color: #fff;
-      font-size: 1.1rem;
+      font-size: 1.13rem;
       font-weight: bold;
-      margin: 10px 0 4px 0;
+      margin: 12px 0 4px 0;
       letter-spacing: 2px;
+      text-shadow: 1px 1px 0 #a34928;
     }
 
-    .main-content {
+    .main-card {
+      display: flex;
+      flex-direction: row;
+      /* ...existing code... */
+    }
+
+    .main-area {
       flex: 1;
-      padding: 20px 0 20px 0;
       display: flex;
       flex-direction: column;
-      align-items: center;
       min-width: 0;
     }
 
     .main-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin-left: 100px;
-  position: relative;
-  padding-right: 20px; /* 預留空間 */
-}
-
-    /* 讓右側按鈕群推到最右 */
-    .right-btn-group {
+      background: #e08a3d;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      box-shadow: 0 4px 16px #e08a3d33;
       display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-left: auto;
-      /* 自動推到最右 */
+      align-items: center;
+      justify-content: flex-start;
+      gap: 16px;
+      width: 100%;
+      padding: 24px 32px;
+      border-bottom: 4px solid #fff8e1;
+      position: relative;
     }
 
     .main-header .arrow-btn {
       background: #fff;
       border: 2px solid #e08a3d;
-      border-radius: 12px;
-      width: 40px;
-      height: 40px;
+      border-radius: 16px;
+      width: 48px;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
+      font-size: 2rem;
       color: #e08a3d;
       font-weight: bold;
-      margin: 0 10px;
+      margin: 0 8px;
+      box-shadow: 0 2px 8px #e08a3d22;
+      transition: background 0.2s;
+    }
+
+    .main-header .arrow-btn:hover {
+      background: #ffe0b2;
     }
 
     .main-header .main-title {
@@ -159,10 +192,21 @@
       color: #fff;
       background: #e08a3d;
       border-radius: 18px;
-      padding: 0 30px;
+      padding: 0 36px;
       letter-spacing: 4px;
       font-family: 'Poppins', sans-serif;
       box-shadow: 0 2px 8px #e08a3d44;
+      border: 4px solid #fff;
+      margin: 0 24px;
+      text-shadow: 2px 2px 0 #a34928;
+    }
+
+    .right-btn-group {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      margin-left: auto;
+      align-items: center;
     }
 
     .main-header .challenge-btn,
@@ -170,59 +214,77 @@
       background: #fff;
       border: 2px solid #e08a3d;
       border-radius: 16px;
-      width: 60px;
-      height: 40px;
+      width: 70px;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: #e08a3d;
       font-weight: bold;
       margin-left: 10px;
+      box-shadow: 0 2px 8px #e08a3d22;
+      transition: background 0.2s;
     }
 
     .main-header .bell-btn {
-      font-size: 1.5rem;
+      font-size: 2rem;
+      width: 48px;
+      padding: 0;
+    }
+
+    .main-header .challenge-btn:hover,
+    .main-header .bell-btn:hover {
+      background: #ffe0b2;
     }
 
     .lesson-list {
       width: 100%;
-      max-width: 700px;
+      max-width: 800px;
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      gap: 32px;
       margin: 0 auto 20px auto;
-      margin-top: 20px;
+      margin-top: 32px;
     }
 
     .lesson-card {
       background: #f9fbe7;
-      border: 3px solid #e08a3d;
+      border: 4px solid #e08a3d;
       border-radius: 24px;
-      padding: 18px 24px 12px 24px;
-      box-shadow: 0 2px 8px #e08a3d22;
+      padding: 22px 32px 16px 32px;
+      box-shadow: 0 4px 16px #e08a3d33;
       position: relative;
+      transition: box-shadow 0.2s;
+    }
+
+    .lesson-card:hover {
+      box-shadow: 0 8px 32px #e08a3d44;
     }
 
     .lesson-card .lesson-title {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: bold;
       color: #222;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 0 #fffde7;
     }
 
     .lesson-card .lesson-desc {
       color: #444;
-      font-size: 1.05rem;
-      margin-bottom: 8px;
+      font-size: 1.08rem;
+      margin-bottom: 12px;
+      line-height: 1.7;
     }
 
     .lesson-card .lesson-meta {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       color: #888;
+      margin-top: 8px;
     }
 
     .lesson-card .lesson-meta .level {
@@ -236,11 +298,13 @@
       color: #fff;
       border: none;
       border-radius: 16px;
-      padding: 4px 24px;
-      font-size: 1.1rem;
+      padding: 6px 32px;
+      font-size: 1.15rem;
       font-weight: bold;
-      margin-top: 6px;
+      margin-top: 0;
       transition: background 0.2s;
+      box-shadow: 0 2px 8px #e08a3d22;
+      letter-spacing: 2px;
     }
 
     .lesson-card .lesson-btn:hover {
@@ -249,36 +313,40 @@
     }
 
     .progress-bar {
-      width: 90%;
-      height: 18px;
+      width: 92%;
+      height: 22px;
       background: #fff;
-      border-radius: 12px;
-      border: 2px solid #e08a3d;
-      margin: 0 auto 10px auto;
+      border-radius: 14px;
+      border: 3px solid #e08a3d;
+      margin: 0 auto 18px auto;
       overflow: hidden;
       position: relative;
-      margin-top: 20px;
+      margin-top: 32px;
+      box-shadow: 0 2px 8px #e08a3d22;
     }
 
     .progress-bar-inner {
       height: 100%;
-      background: #e08a3d;
-      border-radius: 12px 0 0 12px;
+      background: linear-gradient(90deg, #e08a3d 70%, #ffb74d 100%);
+      border-radius: 14px 0 0 14px;
       width: 40%;
       transition: width 0.5s;
+      box-shadow: 2px 0 8px #e08a3d44 inset;
     }
 
     .rightbar .unit-btn {
       background: #fff;
       color: #e08a3d;
       border: none;
-      border-radius: 18px;
+      border-radius: 20px;
       width: 100%;
-      padding: 10px 0;
-      font-size: 1.2rem;
+      padding: 14px 0;
+      font-size: 1.25rem;
       font-weight: bold;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 6px #e08a3d22;
       transition: background 0.2s;
+      letter-spacing: 2px;
     }
 
     .rightbar .unit-btn:hover {
@@ -287,11 +355,12 @@
 
     .rightbar .section-title {
       color: #fff;
-      font-size: 1.1rem;
+      font-size: 1.18rem;
       font-weight: bold;
-      margin: 10px 0 4px 0;
+      margin: 12px 0 8px 0;
       letter-spacing: 2px;
       text-align: center;
+      text-shadow: 1px 1px 0 #a34928;
     }
 
     .rightbar .group-btn {
@@ -300,11 +369,14 @@
       border: none;
       border-radius: 16px;
       width: 100%;
-      padding: 8px 0;
-      font-size: 1.05rem;
+      padding: 10px 0;
+      font-size: 1.09rem;
       font-weight: bold;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 6px #e08a3d22;
       transition: background 0.2s;
+      letter-spacing: 1px;
+      position: relative;
     }
 
     .rightbar .group-btn:hover {
@@ -312,39 +384,34 @@
     }
 
     .rightbar .group-btn.disabled-btn {
-      position: relative;
       pointer-events: none;
-      /* 禁用按鈕功能 */
-      color: gray;
-      /* 文字變灰 */
-      background-color: white;
-      /* 可依需求調整 */
+      color: #aaa;
+      background-color: #fff;
       border: none;
-      /* 如果原本有邊框可調整 */
+      opacity: 0.8;
     }
 
     .rightbar .group-btn.disabled-btn::after {
       content: '待開發';
       position: absolute;
       top: 50%;
-      left: 50%;
+      left: 80%;
       transform: translate(-50%, -50%);
-      background-color: rgba(0, 0, 0, 0.5);
-      /* 半透明背景 */
+      background-color: #e08a3d;
       color: white;
-      padding: 2px 8px;
+      padding: 2px 10px;
       border-radius: 10px;
-      font-size: 1rem;
+      font-size: 0.95rem;
       pointer-events: none;
-      /* 文字不影響滑鼠事件 */
+      font-weight: normal;
+      opacity: 0.95;
+      box-shadow: 0 1px 4px #e08a3d44;
     }
 
     .rightbar .group-btn.disabled-btn:hover,
     .rightbar .group-btn.disabled-btn:focus {
-      background-color: white;
-      /* 移除 hover/focus 效果 */
+      background-color: #fff;
       cursor: default;
-      /* 游標改為預設 */
       outline: none;
     }
 
@@ -359,6 +426,8 @@
       justify-content: center;
       margin-top: 18px;
       font-size: 1.1rem;
+      box-shadow: 0 2px 8px #e08a3d22;
+      letter-spacing: 2px;
     }
   </style>
 </head>
@@ -367,7 +436,7 @@
   <div class="main-card">
     <!-- 側邊欄 -->
     <div class="sidebar">
-      <div class="logo"><img src="./Main_files/Cat1.png" alt="logo"></div>
+      <div class="logo"><img src="images/3/runing_cat.gif" alt="logo"></div>
       <div style="font-size:1.2rem;font-weight:bold;margin-bottom:10px;">旅行中</div>
       <button class="nav-btn">首頁</button>
       <button class="nav-btn">筆記</button>
@@ -379,8 +448,8 @@
       <button class="nav-btn2">徽章</button>
       <button class="nav-btn2">物品庫</button>
     </div>
-    <!-- 主內容 -->
-    <div class="main-content">
+    <!-- 主區塊：標題列+內容 -->
+    <div class="main-area">
       <div class="main-header">
         <button class="arrow-btn">←</button>
         <span class="main-title">軟體應用丙級</span>
@@ -390,26 +459,28 @@
           <button class="bell-btn">🔔</button>
         </div>
       </div>
-      <div class="lesson-list">
-        <div class="lesson-card">
-          <div class="lesson-title">電腦基礎概念與操作</div>
-          <div class="lesson-desc">介紹個人電腦的基本架構與組成，包含，桌面操作、輸入輸出設備、檔案類型、資料傳輸速度基本功能等。適合無基礎學員，建立使用電腦的基本技能和知識。</div>
-          <div class="lesson-meta">
-            <span>● 課程 初學者級</span>
-            <button class="lesson-btn">上課</button>
+      <div class="main-content">
+        <div class="lesson-list">
+          <div class="lesson-card">
+            <div class="lesson-title">電腦基礎概念與操作</div>
+            <div class="lesson-desc">介紹個人電腦的基本架構與組成，包含，桌面操作、輸入輸出設備、檔案類型、資料傳輸速度基本功能等。適合無基礎學員，建立使用電腦的基本技能和知識。</div>
+            <div class="lesson-meta">
+              <span>● 課程 初學者級</span>
+              <button class="lesson-btn">上課</button>
+            </div>
+          </div>
+          <div class="lesson-card">
+            <div class="lesson-title">作業系統與檔案管理</div>
+            <div class="lesson-desc">介紹不同作業系統的架構與功能、使用者權限，學習如何管理檔案與資料夾，理解檔案系統的運作原理，並實務操作常用的檔案管理工具。</div>
+            <div class="lesson-meta">
+              <span>● 課程 初學者至新手級</span>
+              <button class="lesson-btn">上課</button>
+            </div>
           </div>
         </div>
-        <div class="lesson-card">
-          <div class="lesson-title">作業系統與檔案管理</div>
-          <div class="lesson-desc">介紹不同作業系統的架構與功能、使用者權限，學習如何管理檔案與資料夾，理解檔案系統的運作原理，並實務操作常用的檔案管理工具。</div>
-          <div class="lesson-meta">
-            <span>● 課程 初學者至新手級</span>
-            <button class="lesson-btn">上課</button>
-          </div>
+        <div class="progress-bar">
+          <div class="progress-bar-inner" style="width:40%"></div>
         </div>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-bar-inner" style="width:40%"></div>
       </div>
     </div>
     <!-- 右側欄 -->

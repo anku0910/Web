@@ -369,7 +369,6 @@
     }
 
     .rightbar .group-btn {
-       z-index: 1;
       background: #fff;
       color: #e08a3d;
       border: none;
@@ -392,27 +391,31 @@
     .rightbar .group-btn.disabled-btn {
       pointer-events: none;
       color: #aaa;
-      background-color: #fff;
+      background-color: rgba(255, 255, 255, 0.8);
       border: none;
-      opacity: 0.8;
+      position: relative;
     }
 
     .rightbar .group-btn.disabled-btn::after {
       content: '待開發';
       position: absolute;
       top: 50%;
-      left: 80%;
+      left: 20%;
       transform: translate(-50%, -50%);
-      background-color: #e08a3d;
-      color: white;
-      padding: 2px 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      padding: 2px 6px;
       border-radius: 10px;
-      font-size: 0.95rem;
+      font-size: 0.8rem;
       pointer-events: none;
-      font-weight: normal;
-      opacity: 0.95;
-      box-shadow: 0 1px 4px #e08a3d44;
+      font-weight: bolder;
+      white-space: nowrap;
+      z-index: 10;
+      opacity: 1;
     }
+
+
+
 
     .rightbar .group-btn.disabled-btn:hover,
     .rightbar .group-btn.disabled-btn:focus {

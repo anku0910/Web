@@ -80,26 +80,6 @@
       padding-top: 28px;
     }
 
-    .sidebar .logo {
-      width: 100px;
-      height: 70px;
-      background: #d3ecf5;
-      border-radius: 20px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 8px #e08a3d44;
-      border: 2px solid #e08a3d;
-      overflow: hidden;
-    }
-
-    .sidebar .logo img {
-      width: 60px;
-      height: 60px;
-      object-fit: contain;
-    }
-
     .sidebar .nav-btn,
     .sidebar .nav-btn2 {
       background: #fff;
@@ -388,9 +368,6 @@
       opacity: 1;
     }
 
-
-
-
     .rightbar .group-btn.disabled-btn:hover,
     .rightbar .group-btn.disabled-btn:focus {
       background-color: #fff;
@@ -421,15 +398,50 @@
       display: inline-block;
       position:absolute;top: 100px
     }
+    .logo-box {
+  position: relative;
+  display: flex;
+  background: #d3ecf5;   /* 與圖片背景色相似，可依需求調整 */
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 70px;
+  margin-bottom: 10px;
+}
+
+.logo-img {
+  width: 80px;           /* 圖片大小可依需求調整 */
+  display: block;
+  margin: 0 auto;
+  position: absolute;
+  top: -6px;
+  margin-top: 12px;      /* 讓圖片稍微往下，留空間給右下角文字 */
+}
+
+.logo-text {
+  position: absolute;
+  right: -8px;
+  bottom: -8px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 2px #0003;
+  background: rgba(0,0,0,0.15); /* 可選，讓文字更清晰 */
+  padding: 2px 8px;
+  border-radius: 6px;
+}
   </style>
 </head>
 
 <body>
-  <div class="main-card">
+  <div class="main-card">    
     <!-- 側邊欄 -->
     <div class="sidebar">
-      <div class="logo"><img src="images/3/runing_cat.gif" alt="logo"></div>
-      <div style="font-size:1.2rem;font-weight:bold;margin-bottom:10px;">旅行中</div>
+      <div class="logo-box">
+     <img src="images/3/runing_cat.gif" alt="logo" class="logo-img">
+      <div class="logo-text">旅行中</div>
+    </div>
       <button class="nav-btn" onclick="showPage('page-home')">首頁</button>
       <button class="nav-btn" onclick="showPage('page-notes')">筆記</button>
       <button class="nav-btn" onclick="showPage('page-courses')">我的課程</button>

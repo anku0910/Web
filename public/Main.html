@@ -168,27 +168,6 @@
       position: relative;
     }
 
-    .main-header .arrow-btn {
-      background: #fff;
-      border: 2px solid #e08a3d;
-      border-radius: 16px;
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: #e08a3d;
-      font-weight: bold;
-      margin: 0 8px;
-      box-shadow: 0 2px 8px #e08a3d22;
-      transition: background 0.2s;
-    }
-
-    .main-header .arrow-btn:hover {
-      background: #ffe0b2;
-    }
-
     .main-header .main-title {
       font-size: 2.7rem;
       font-weight: bold;
@@ -202,14 +181,15 @@
       border: 4px solid #fff;
       margin: 0 24px;
       text-shadow: 2px 2px 0 #a34928;
+      margin-left:200px;
     }
 
     .right-btn-group {
       display: flex;
-      flex-direction: row;
+      flex-direction:column;
       gap: 10px;
-      margin-left: auto;
-      align-items: center;
+      align-items:center;
+      margin-right: auto;
     }
 
     .main-header .challenge-btn,
@@ -228,12 +208,6 @@
       margin-left: 10px;
       box-shadow: 0 2px 8px #e08a3d22;
       transition: background 0.2s;
-    }
-
-    .main-header .bell-btn {
-      font-size: 2rem;
-      width: 48px;
-      padding: 0;
     }
 
     .main-header .challenge-btn:hover,
@@ -445,6 +419,7 @@
       background: #e08a3d;
       border-radius: 100px;
       display: inline-block;
+      position:absolute;top: 100px
     }
   </style>
 </head>
@@ -455,10 +430,10 @@
     <div class="sidebar">
       <div class="logo"><img src="images/3/runing_cat.gif" alt="logo"></div>
       <div style="font-size:1.2rem;font-weight:bold;margin-bottom:10px;">旅行中</div>
-      <button class="nav-btn">首頁</button>
-      <button class="nav-btn">筆記</button>
-      <button class="nav-btn">我的課程</button>
-      <button class="nav-btn">學習紀錄</button>
+      <button class="nav-btn" onclick="showPage('page-home')">首頁</button>
+      <button class="nav-btn" onclick="showPage('page-notes')">筆記</button>
+      <button class="nav-btn" onclick="showPage('page-courses')">我的課程</button>
+      <button class="nav-btn" onclick="showPage('page-records')">學習紀錄</button>
       <div class="section-title">個人檔案</div>
       <button class="nav-btn2">任務</button>
       <button class="nav-btn2">旅行</button>
@@ -468,38 +443,56 @@
     <!-- 主區塊：標題列+內容 -->
     <div class="main-area">
       <div class="main-header">
-        <button class="arrow-btn">←</button>
+          <div class="ball" style="left:-30px;"></div>
+          <div class="ball" style="right:36px;"></div>
         <span class="main-title">軟體應用丙級</span>
-        <button class="arrow-btn">→</button>
         <div class="right-btn-group" style="z-index: 2;" >
           <button class="challenge-btn">挑戰</button>
           <button class="bell-btn">🔔</button>
         </div>
       </div>
       <div class="main-content">
-        <div class="ball" style="position:absolute;top: 80px;left:180px;"></div>
-        <div class="ball" style="position:absolute;top:80px;right:180px;"></div>
-        <div class="lesson-list">
-          <div class="lesson-card">
-            <div class="lesson-title">電腦基礎概念與操作</div>
-            <div class="lesson-desc">介紹個人電腦的基本架構與組成，包含，桌面操作、輸入輸出設備、檔案類型、資料傳輸速度基本功能等。適合無基礎學員，建立使用電腦的基本技能和知識。</div>
-            <div class="lesson-meta">
-              <span>● 課程 初學者級</span>
-              <button class="lesson-btn">上課</button>
+        <!-- 我的課程 -->
+        <div id="page-courses">
+          <!-- ...原本我的課程內容... -->
+          <div class="lesson-list">
+            <div class="lesson-card">
+              <div class="lesson-title">電腦基礎概念與操作</div>
+              <div class="lesson-desc">介紹個人電腦的基本架構與組成，包含，桌面操作、輸入輸出設備、檔案類型、資料傳輸速度基本功能等。適合無基礎學員，建立使用電腦的基本技能和知識。</div>
+              <div class="lesson-meta">
+                <span>● 課程 初學者級</span>
+                <button class="lesson-btn">上課</button>
+              </div>
+            </div>
+            <div class="lesson-card">
+              <div class="lesson-title">作業系統與檔案管理</div>
+              <div class="lesson-desc">介紹不同作業系統的架構與功能、使用者權限，學習如何管理檔案與資料夾，理解檔案系統的運作原理，並實務操作常用的檔案管理工具。</div>
+              <div class="lesson-meta">
+                <span>● 課程 初學者至新手級</span>
+                <button class="lesson-btn">上課</button>
+              </div>
             </div>
           </div>
-          <div class="lesson-card">
-            <div class="lesson-title">作業系統與檔案管理</div>
-            <div class="lesson-desc">介紹不同作業系統的架構與功能、使用者權限，學習如何管理檔案與資料夾，理解檔案系統的運作原理，並實務操作常用的檔案管理工具。</div>
-            <div class="lesson-meta">
-              <span>● 課程 初學者至新手級</span>
-              <button class="lesson-btn">上課</button>
-            </div>
+          <div class="progress-bar">
+            <div class="progress-bar-inner" style="width:40%"></div>
           </div>
         </div>
-        <div class="progress-bar">
-          <div class="progress-bar-inner" style="width:40%"></div>
+        <!-- 筆記 -->
+        <div id="page-notes" style="display:none;">
+          <h2>筆記</h2>
+          <p>這裡是筆記內容。</p>
         </div>
+        <!-- 首頁 -->
+        <div id="page-home" style="display:none;">
+          <h2>首頁</h2>
+          <p>這裡是首頁內容。</p>
+        </div>
+        <!-- 學習紀錄 -->
+        <div id="page-records" style="display:none;">
+          <h2>學習紀錄</h2>
+          <p>這裡是學習紀錄內容。</p>
+        </div>
+        <!-- 其他頁面依此類推... -->
       </div>
     </div>
     <!-- 右側欄 -->
@@ -516,7 +509,15 @@
     </div>
   </div>
 
-
+  <script>
+    // 切換內容區塊
+    function showPage(pageId) {
+      const pages = ['page-home', 'page-notes', 'page-courses', 'page-records'];
+      pages.forEach(id => {
+        document.getElementById(id).style.display = (id === pageId) ? '' : 'none';
+      });
+    }
+  </script>
 </body>
 
 </html>

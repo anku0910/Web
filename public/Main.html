@@ -1,12 +1,14 @@
 <!DOCTYPE html>
+<!-- saved from url=(0060)file:///C:/Users/c1348/Documents/GitHub/Web/public/Main.html -->
 <html lang="zh-Hant">
 
 <head>
-  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
   <title>軟體應用丙級主畫面</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="./Main_files/bootstrap.min.css" rel="stylesheet">
+  <link href="./Main_files/css2" rel="stylesheet">
   <style>
     body {
       background-color: #c08b5c;
@@ -118,21 +120,25 @@
     }
 
     .main-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  position: relative;
-  padding-right: 20px; /* 預留空間 */
-}
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+      margin-left: 100px;
+      /* 左側預留空間 */
+      padding-right: 20px;
+      /* 預留空間 */
+    }
 
-/* 讓右側按鈕群推到最右 */
-.right-btn-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-left: auto; /* 自動推到最右 */
-}
+    /* 讓右側按鈕群推到最右 */
+    .right-btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-left: auto;
+      /* 自動推到最右 */
+    }
 
     .main-header .arrow-btn {
       background: #fff;
@@ -188,6 +194,7 @@
       flex-direction: column;
       gap: 30px;
       margin: 0 auto 20px auto;
+      margin-top: 20px;
     }
 
     .lesson-card {
@@ -252,6 +259,7 @@
       margin: 0 auto 10px auto;
       overflow: hidden;
       position: relative;
+      margin-top: 20px;
     }
 
     .progress-bar-inner {
@@ -305,6 +313,43 @@
       background: #ffe0b2;
     }
 
+    .rightbar .group-btn.disabled-btn {
+      position: relative;
+      pointer-events: none;
+      /* 禁用按鈕功能 */
+      color: gray;
+      /* 文字變灰 */
+      background-color: white;
+      /* 可依需求調整 */
+      border: none;
+      /* 如果原本有邊框可調整 */
+    }
+
+    .rightbar .group-btn.disabled-btn::after {
+      content: '待開發';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      /* 半透明背景 */
+      color: white;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 1rem;
+      pointer-events: none;
+      /* 文字不影響滑鼠事件 */
+    }
+
+    .rightbar .group-btn.disabled-btn:hover,
+    .rightbar .group-btn.disabled-btn:focus {
+      background-color: white;
+      /* 移除 hover/focus 效果 */
+      cursor: default;
+      /* 游標改為預設 */
+      outline: none;
+    }
+
     .rightbar .ad {
       background: #e0e0e0;
       color: #888;
@@ -324,7 +369,7 @@
   <div class="main-card">
     <!-- 側邊欄 -->
     <div class="sidebar">
-      <div class="logo"><img src="images/1/Cat1.png" alt="logo"></div>
+      <div class="logo"><img src="./Main_files/Cat1.png" alt="logo"></div>
       <div style="font-size:1.2rem;font-weight:bold;margin-bottom:10px;">旅行中</div>
       <button class="nav-btn">首頁</button>
       <button class="nav-btn">筆記</button>
@@ -339,12 +384,12 @@
     <!-- 主內容 -->
     <div class="main-content">
       <div class="main-header">
-        <button class="arrow-btn">&#8592;</button>
+        <button class="arrow-btn">←</button>
         <span class="main-title">軟體應用丙級</span>
-        <button class="arrow-btn">&#8594;</button>
+        <button class="arrow-btn">→</button>
         <div class="right-btn-group">
           <button class="challenge-btn">挑戰</button>
-          <button class="bell-btn">&#128276;</button>
+          <button class="bell-btn">🔔</button>
         </div>
       </div>
       <div class="lesson-list">
@@ -373,15 +418,17 @@
     <div class="rightbar">
       <button class="unit-btn">切換單元</button>
       <div class="section-title">社群</div>
-      <button class="group-btn">單元討論區</button>
-      <button class="group-btn">作品</button>
-      <button class="group-btn">好友</button>
-      <button class="group-btn">社群小組</button>
-      <button class="group-btn">排行榜</button>
-      <button class="group-btn">AI學伴</button>
+      <button class="group-btn disabled-btn">單元討論區</button>
+      <button class="group-btn disabled-btn">作品</button>
+      <button class="group-btn disabled-btn">好友</button>
+      <button class="group-btn disabled-btn">社群小組</button>
+      <button class="group-btn disabled-btn">排行榜</button>
+      <button class="group-btn disabled-btn">AI學伴</button>
       <div class="ad">廣告</div>
     </div>
   </div>
+
+
 </body>
 
 </html>

@@ -54,6 +54,22 @@
       color: #fff;
       font-family: 'Poppins', sans-serif;
       box-shadow: 2px 0 12px #a3492833 inset;
+      border-left: none;
+    }
+
+    .rightbar::after {
+      content: "";
+      position: absolute;
+      top: 120px;
+      /* 控制邊框起始位置 */
+      left: 1045px;
+      width: 10px;
+      /* 邊框寬度 */
+      height: 85%;
+      /* 邊框長度 */
+      background-color: #C47323;
+      border-radius: 0 0px 0px 0;
+      /* 可選圓角 */
     }
 
     .sidebar {
@@ -66,8 +82,24 @@
       border-bottom-right-radius: 0px;
       box-shadow: 4px 0 12px #a3492833;
       padding-top: 28px;
+      border-right: none;
     }
 
+    .sidebar::after {
+      content: "";
+      position: absolute;
+      top: 120px;
+      /* 控制邊框起始位置 */
+      right: 1045px;
+      width: 10px;
+      /* 邊框寬度 */
+      height: 85%;
+      /* 邊框長度 */
+      background-color: #C47323;
+      border-radius: 0 0px 0px 0;
+      /* 可選圓角 */
+    }
+    
     .rightbar {
       z-index: 2;
       margin-right: 0;
@@ -143,8 +175,8 @@
       justify-content: flex-start;
       gap: 16px;
       width: 100%;
-      padding: 24px 32px;
-      border-bottom: 4px solid #fff8e1;
+      padding: 17px 32px;
+      /*border-bottom: 12px solid rgba(0, 0, 0, 0.15);*/
       position: relative;
     }
 
@@ -161,14 +193,14 @@
       border: 4px solid #fff;
       margin: 0 24px;
       text-shadow: 2px 2px 0 #a34928;
-      margin-left:200px;
+      margin-left: 200px;
     }
 
     .right-btn-group {
       display: flex;
-      flex-direction:column;
+      flex-direction: column;
       gap: 10px;
-      align-items:center;
+      align-items: center;
       margin-right: auto;
     }
 
@@ -389,63 +421,83 @@
       box-shadow: 0 2px 8px #e08a3d22;
       letter-spacing: 2px;
     }
+
     .ball {
-      z-index: 1;
-      width: 50px;
-      height: 70px;
-      background: #e08a3d;
-      border-radius: 100px;
+      z-index: 0;
+      /* 保持較低 */
+      width: 70px;
+      height: 50px;
+      margin-top: 20px;
+      background: #C47323;
+      border-radius: 0 0 100px 100px;
       display: inline-block;
-      position:absolute;top: 100px
+      position: absolute;
+      /* left 或 right 由 inline style 控制 */
+      top: 100px;
     }
+
     .logo-box {
-  position: relative;
-  display: flex;
-  background: #d3ecf5;   /* 與圖片背景色相似，可依需求調整 */
-  border-radius: 12px;
-  align-items: center;
-  justify-content: center;
-  width: 120px;
-  height: 70px;
-  margin-bottom: 10px;
-}
+      position: relative;
+      display: flex;
+      background: #d3ecf5;
+      /* 與圖片背景色相似，可依需求調整 */
+      border-radius: 12px;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 70px;
+      margin-bottom: 10px;
+    }
 
-.logo-img {
-  width: 80px;           /* 圖片大小可依需求調整 */
-  display: block;
-  margin: 0 auto;
-  position: absolute;
-  top: -6px;
-  margin-top: 12px;      /* 讓圖片稍微往下，留空間給右下角文字 */
-}
+    .logo-img {
+      width: 80px;
+      /* 圖片大小可依需求調整 */
+      display: block;
+      margin: 0 auto;
+      position: absolute;
+      top: -6px;
+      margin-top: 12px;
+      /* 讓圖片稍微往下，留空間給右下角文字 */
+    }
 
-.logo-text {
-  position: absolute;
-  right: -8px;
-  bottom: -8px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 1px 1px 2px #0003;
-  background: rgba(0,0,0,0.15); /* 可選，讓文字更清晰 */
-  padding: 2px 8px;
-  border-radius: 6px;
-}
+    .logo-text {
+      position: absolute;
+      right: -8px;
+      bottom: -8px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 1px 1px 2px #0003;
+      background: rgba(0, 0, 0, 0.15);
+      /* 可選，讓文字更清晰 */
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .dark-frame {
+      background-color: #C47323;
+      color: #eee;
+      padding: 5px 116px;
+      margin-right: 6px;
+    }
   </style>
 </head>
 
 <body>
-  <div class="main-card">    
+  <div class="main-card">
     <!-- 側邊欄 -->
     <div class="sidebar">
       <div class="logo-box">
-     <img src="images/3/runing_cat.gif" alt="logo" class="logo-img">
-      <div class="logo-text">旅行中</div>
-    </div>
+        <img src="images/3/runing_cat.gif" alt="logo" class="logo-img">
+        <div class="logo-text">旅行中</div>
+      </div>
+      <div class="dark-frame" style="visibility:hidden"></div>
       <button class="nav-btn" onclick="showPage('page-home')">首頁</button>
       <button class="nav-btn" onclick="showPage('page-notes')">筆記</button>
       <button class="nav-btn" onclick="showPage('page-courses')">我的課程</button>
+      <div class="dark-frame"></div>
       <button class="nav-btn" onclick="showPage('page-records')">學習紀錄</button>
+      <div class="dark-frame"></div>
       <div class="section-title">個人檔案</div>
       <button class="nav-btn2">任務</button>
       <button class="nav-btn2">旅行</button>
@@ -455,15 +507,16 @@
     <!-- 主區塊：標題列+內容 -->
     <div class="main-area">
       <div class="main-header">
-          <div class="ball" style="left:-30px;"></div>
-          <div class="ball" style="right:36px;"></div>
+        <div class="ball" style="left:-30px;"></div>
+        <div class="ball" style="right:36px;"></div>
         <span class="main-title">軟體應用丙級</span>
-        <div class="right-btn-group" style="z-index: 2;" >
+        <div class="right-btn-group" style="z-index: 2;">
           <button class="challenge-btn">挑戰</button>
           <button class="bell-btn">🔔</button>
         </div>
       </div>
-      <div class="main-content">
+      <div class="dark-frame" style="margin-left: 7px; background-color: #C47323; width: 128%; z-index: 5; align-self: center;"></div>
+      <div class="main-content" style="padding: 10px 40px;">
         <!-- 我的課程 -->
         <div id="page-courses">
           <!-- ...原本我的課程內容... -->
@@ -510,13 +563,16 @@
     <!-- 右側欄 -->
     <div class="rightbar">
       <button class="unit-btn">切換單元</button>
+      <div class="dark-frame" style="visibility:hidden; margin-left: 11px;"></div>
       <div class="section-title">社群</div>
+      <div class="dark-frame" style="margin-left: 11px;"></div>
       <button class="group-btn disabled-btn">單元討論區</button>
       <button class="group-btn disabled-btn">作品</button>
       <button class="group-btn disabled-btn">好友</button>
       <button class="group-btn disabled-btn">社群小組</button>
       <button class="group-btn disabled-btn">排行榜</button>
       <button class="group-btn disabled-btn">AI學伴</button>
+      <div class="dark-frame" style="margin-left: 11px;"></div>
       <div class="ad">廣告</div>
     </div>
   </div>

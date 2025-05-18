@@ -99,7 +99,7 @@
       border-radius: 0 0px 0px 0;
       /* 可選圓角 */
     }
-    
+
     .rightbar {
       z-index: 2;
       margin-right: 0;
@@ -480,6 +480,41 @@
       padding: 5px 116px;
       margin-right: 6px;
     }
+
+    .lesson-header {
+      display: flex;
+      justify-content: space-between;
+      /* 文字區和進度框兩端對齊 */
+      align-items: center;
+      /* 垂直置中 */
+      padding: 8px 32px;
+      /* 你可以依需求調整內距 */
+      background-color: #C47323;
+      height: 150px;
+      margin-left: -32px;
+      margin-right: -32px;
+      margin-top: -30px;
+      /* 向上移動30px */
+      /* 其他你需要的樣式 */
+    }
+
+    .lesson-text {
+      display: flex;
+      flex-direction: column;
+      /* 讓標題和描述垂直排列 */
+      justify-content: center;
+      /* 可以設定寬度限制 */
+      max-width: 70%;
+    }
+
+    .lesson-header .progrress-frame {
+      background-color: #ffffff;
+      width: 20%;
+      height: 100px;
+      border-radius: 10px;
+      margin-top: 16px;
+      margin-right: 32px;
+    }
   </style>
 </head>
 
@@ -515,7 +550,8 @@
           <button class="bell-btn">🔔</button>
         </div>
       </div>
-      <div class="dark-frame" style="margin-left: 7px; background-color: #C47323; width: 128%; z-index: 5; align-self: center;"></div>
+      <div class="dark-frame"
+        style="margin-left: 7px; background-color: #C47323; width: 128%; z-index: 5; align-self: center;"></div>
       <div class="main-content" style="padding: 10px 40px;">
         <!-- 我的課程 -->
         <div id="page-courses">
@@ -526,7 +562,7 @@
               <div class="lesson-desc">介紹個人電腦的基本架構與組成，包含，桌面操作、輸入輸出設備、檔案類型、資料傳輸速度基本功能等。適合無基礎學員，建立使用電腦的基本技能和知識。</div>
               <div class="lesson-meta">
                 <span>● 課程 初學者級</span>
-                <button class="lesson-btn">上課</button>
+                <button class="lesson-btn" onclick="showPage('page-lesson', 'basic-pc')">上課</button>
               </div>
             </div>
             <div class="lesson-card">
@@ -534,7 +570,7 @@
               <div class="lesson-desc">介紹不同作業系統的架構與功能、使用者權限，學習如何管理檔案與資料夾，理解檔案系統的運作原理，並實務操作常用的檔案管理工具。</div>
               <div class="lesson-meta">
                 <span>● 課程 初學者至新手級</span>
-                <button class="lesson-btn">上課</button>
+                <button class="lesson-btn" onclick="showPage('page-lesson', 'os-file')">上課</button>
               </div>
             </div>
           </div>
@@ -557,6 +593,20 @@
           <h2>學習紀錄</h2>
           <p>這裡是學習紀錄內容。</p>
         </div>
+        <!-- 課堂 -->
+        <div id="page-lesson" style="display:none;">
+          <div class="lesson-header">
+            <div class="lesson-text">
+              <h2 id="lesson-title" style="font-size: 1.6rem; color: #FFF; letter-spacing: 2px; margin: 6px 0px;">
+                課堂名稱</h2>
+              <h4 id="lesson-desc" style="font-size: 1rem; color: #FFF; margin: 0;">課程內容會顯示在這裡。</h4>
+            </div>
+            <div class="progrress-frame">
+              <img src="images/3/Progress_Cat.png" style="width: 150%; height: 200%;" alt="進度貓咪">
+            </div>
+          </div>
+          <button class="lesson-btn" style="margin: 20px;" onclick="showPage('page-courses')">回課程列表</button>
+        </div>
         <!-- 其他頁面依此類推... -->
       </div>
     </div>
@@ -578,13 +628,30 @@
   </div>
 
   <script>
-    // 切換內容區塊
-    function showPage(pageId) {
-      const pages = ['page-home', 'page-notes', 'page-courses', 'page-records'];
+    const lessons = {
+      'basic-pc': {
+        title: '電腦基礎概念與操作',
+        desc: '介紹個人電腦的基本架構與組成，包含桌面操作、輸入輸出設備、檔案類型、資料傳輸速度基本功能等。適合無基礎學員，建立使用電腦的基本技能和知識。'
+      },
+      'os-file': {
+        title: '作業系統與檔案管理',
+        desc: '介紹不同作業系統的架構與功能、使用者權限，學習如何管理檔案與資料夾，理解檔案系統的運作原理，並實務操作常用的檔案管理工具。'
+      }
+      // 你可以繼續新增更多課程資料
+    };
+
+    function showPage(pageId, lessonId) {
+      const pages = ['page-home', 'page-notes', 'page-courses', 'page-records', 'page-lesson'];
       pages.forEach(id => {
         document.getElementById(id).style.display = (id === pageId) ? '' : 'none';
       });
+
+      if (pageId === 'page-lesson' && lessonId && lessons[lessonId]) {
+        document.getElementById('lesson-title').textContent = lessons[lessonId].title;
+        document.getElementById('lesson-desc').textContent = lessons[lessonId].desc;
+      }
     }
+
   </script>
 </body>
 

@@ -312,6 +312,17 @@ body {
   box-shadow: 0 2px 8px #e08a3d22;
   letter-spacing: 2px;
 }
+.lesson-btn {
+  background: #e08a3d;
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 4px 24px;
+  font-size: 1.15rem;
+  font-weight: bold;
+  margin-top: 0;
+  transition: background 0.2s;
+}
 
 .lesson-card .lesson-btn:hover {
   background: #ffb74d;
@@ -335,7 +346,7 @@ body {
   height: 100%;
   background: linear-gradient(90deg, #e08a3d 70%, #ffb74d 100%);
   border-radius: 14px 0 0 14px;
-  width: 40%;
+  width: 10%;
   transition: width 0.5s;
   box-shadow: 2px 0 8px #e08a3d44 inset;
 }

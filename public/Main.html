@@ -67,7 +67,7 @@
             </div>
           </div>
           <div class="progress-bar">
-            <div class="progress-bar-inner" style="width:40%"></div>
+            <div class="progress-bar-inner" style="width:3%"></div>
           </div>
         </div>
         <!-- 筆記 -->
@@ -142,10 +142,14 @@
   </div>
 
   <!-- 挑戰小視窗 Modal -->
-  <div id="challenge-modal" style="display:none; position: fixed; left: 50%; top: 70%; transform: translate(-50%, 0); min-width: 320px; min-height: 120px; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); z-index: 9999; padding: 24px 32px; text-align: center;">
-    <h3 style="margin-bottom: 16px;">挑戰！</h3>
-    <p>這裡是挑戰視窗內容。</p>
-    <button onclick="closeChallengeModal()" style="margin-top: 18px;" class="lesson-btn">關閉</button>
+  <div id="challenge-modal" style="display:none; position: fixed; left: 50%; top: 60%; transform: translate(-50%, 0); min-width: 320px; min-height: 120px; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); z-index: 9999; padding: 24px 32px; text-align: center;">
+    <h3 style="margin-bottom: 8px;position: absolute;">挑戰！</h3>    
+    <div class="progress-bar">
+      <p style="position: relative; top: -16px; z-index: 2;">這裡是挑戰視窗內容。</p>
+      <div class="progress-bar-inner" style="width:100%"></div>
+    </div>
+
+    <button onclick="closeChallengeModal()" style="margin-top: 0px;" class="lesson-btn">關閉</button>
   </div>
 
   <script>
@@ -172,7 +176,7 @@
         document.getElementById('lesson-desc').textContent = lessons[lessonId].desc;
       }
     }
-
+      // 挑戰小視窗
     function showChallengeModal() {
       // 聚焦遮罩
       let mask = document.getElementById('challenge-mask');

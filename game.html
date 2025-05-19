@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OS冒險者：作業系統互動學習</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --background-color: #ecf0f1;
+            --text-color: #34495e;
+            --border-radius: 8px;
+            --transition-speed: 0.3s;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+        }
+        
+        body {
+            background: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        #game-container {
+            max-width: 1000px;
+            margin: 20px auto;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #game-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        #game-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        #game-stats {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        #game-content {
+            display: flex;
+            flex: 1;
+        }
+        
+        #scene-container {
+            flex: 3;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #scene-animation {
+            height: 300px;
+            margin-bottom: 20px;
+            background: var(--background-color);
+            border-radius: var(--border-radius);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #scene-text {
+            background: white;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--secondary-color);
+            margin-bottom: 20px;
+            min-height: 100px;
+        }
+        
+        #scene-choices {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .choice-btn {
+            padding: 12px 15px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .choice-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .choice-btn i {
+            font-size: 1.2rem;
+        }
+        
+        #sidebar {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 1px solid #e9ecef;
+        }
+        
+        #character-info {
+            margin-bottom: 20px;
+        }
+        
+        #character-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        #character-name {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        #character-role {
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        #inventory-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        #inventory-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .inventory-item {
+            background: white;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            border: 1px solid #e9ecef;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+        
+        .inventory-item:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+        
+        #game-footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        /* 動畫效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .slide-in {
+            animation: slideInRight 0.5s ease-in-out;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* 資源管理動畫區域 */
+        .cpu-container {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: #3498db;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .memory-block {
+            position: absolute;
+            width: 80px;
+            height: 30px;
+            background: #2ecc71;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .process-icon {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: #e74c3c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        /* 檔案系統動畫區域 */
+        .file-explorer {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .file-explorer-header {
+            background: #f8f9fa;
+            padding: 10px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .file-explorer-content {
+            display: flex;
+            flex: 1;
+        }
+        
+        .file-explorer-sidebar {
+            width: 30%;
+            background: #f8f9fa;
+            padding: 10px;
+            border-right: 1px solid #e9ecef;
+        }
+        
+        .file-explorer-main {
+            flex: 1;
+            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        .file-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.2s;
+        }
+        
+        .file-icon:hover {
+            background: #f8f9fa;
+        }
+        
+        .file-icon i {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        
+        .file-name {
+            font-size: 0.8rem;
+            text-align: center;
+        }
+        
+        /* 多工處理動畫區域 */
+        .multitasking-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .task-bar {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            background: #2c3e50;
+            display: flex;
+            padding: 0 10px;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .task-item {
+            height: 30px;
+            padding: 0 10px;
+            background: #34495e;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .task-item:hover {
+            background: #3498db;
+        }
+        
+        .window {
+            position: absolute;
+            width: 300px;
+            height: 200px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+        
+        .window-header {
+            background: #3498db;
+            color: white;
+            padding: 8px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: move;
+        }
+        
+        .window-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .window-controls {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .window-control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .window-close {
+            background: #e74c3c;
+        }
+        
+        .window-minimize {
+            background: #f39c12;
+        }
+        
+        .window-maximize {
+            background: #2ecc71;
+        }
+        
+        .window-content {
+            flex: 1;
+            padding: 10px;
+            overflow: auto;
+        }
+        
+        /* 使用者介面動畫區域 */
+        .ui-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+        }
+        
+        .gui-side {
+            flex: 1;
+            background: url('windows-bg.jpg') center/cover;
+            position: relative;
+            border-right: 1px solid #ddd;
+        }
+        
+        .cli-side {
+            flex: 1;
+            background: #000;
+            color: #0f0;
+            padding: 10px;
+            font-family: monospace;
+            position: relative;
+        }
+        
+        .gui-desktop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 40px);
+            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .desktop-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .desktop-icon i {
+            font-size: 2rem;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            margin-bottom: 5px;
+        }
+        
+        .desktop-icon span {
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+        
+        .gui-taskbar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+        }
+        
+        .cli-prompt {
+            display: flex;
+            margin-bottom: 5px;
+        }
+        
+        .cli-prompt-text {
+            color: #0f0;
+            margin-right: 5px;
+        }
+        
+        .cli-input {
+            background: transparent;
+            border: none;
+            color: #0f0;
+            font-family: monospace;
+            outline: none;
+            flex: 1;
+        }
+        
+        .cli-output {
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="game-header">
+            <div id="game-title">OS冒險者：作業系統互動學習</div>
+            <div id="game-stats">
+                <div class="stat">
+                    <i class="fas fa-star"></i>
+                    <span id="score">0</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-heart"></i>
+                    <span id="lives">3</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-clock"></i>
+                    <span id="time">00:00</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="game-content">
+            <div id="scene-container">
+                <div id="scene-animation"></div>
+                <div id="scene-text"></div>
+                <div id="scene-choices"></div>
+            </div>
+            
+            <div id="sidebar">
+                <div id="character-info">
+                    <div id="character-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div id="character-name">系統管理員</div>
+                    <div id="character-role">新手冒險者</div>
+                    <div id="character-progress">
+                        <div>等級: <span id="character-level">1</span></div>
+                        <div>經驗值: <span id="character-exp">0</span>/100</div>
+                    </div>
+                </div>
+                
+                <div id="inventory">
+                    <div id="inventory-title">
+                        <i class="fas fa-briefcase"></i>
+                        <span>已獲得技能</span>
+                    </div>
+                    <div id="inventory-items">
+                        <!-- 動態生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="game-footer">
+            <div>OS冒險者 © 2025 | 互動式作業系統學習平台</div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

@@ -105,7 +105,7 @@ body {
 }
 
 .sidebar .nav-btn,
-.sidebar .nav-btn2 {
+.sidebar .nav-btn {
   background: #fff;
   color: #a34928;
   border: none;
@@ -123,14 +123,39 @@ body {
 .sidebar .nav-btn2 {
   background: #fff;
   color: #e08a3d;
+  border: none;
   border-radius: 16px;
-  font-size: 1.08rem;
-  margin-bottom: 6px;
+  width: 100%;
   padding: 10px 0;
+  font-size: 1.08rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+  box-shadow: 0 2px 6px #e08a3d22;
+  transition: background 0.2s, color 0.2s;
+  letter-spacing: 2px;
+}
+.rightbar .nav-btn2 {
+  background: #fff;
+  color: #e08a3d;
+  border: none;
+  border-radius: 16px;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 1.08rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+  box-shadow: 0 2px 6px #e08a3d22;
+  transition: background 0.2s, color 0.2s;
+  letter-spacing: 2px;
 }
 
 .sidebar .nav-btn:hover,
 .sidebar .nav-btn2:hover {
+  background: #ffe0b2;
+  color: #a34928;
+}
+
+.rightbar .nav-btn2:hover {
   background: #ffe0b2;
   color: #a34928;
 }

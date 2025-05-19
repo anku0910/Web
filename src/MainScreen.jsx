@@ -88,6 +88,11 @@ const MainScreen = () => {
           </div>
         </div>
       </div>
+      <div className="rightbar">
+        <button className="nav-btn2">次要功能1</button>
+        <button className="nav-btn2">次要功能2</button>
+        {/* 你可以根據需求增加更多 nav-btn2 按鈕 */}
+      </div>
       {/* 轉場特效遮罩 */}
       <div id="transition-overlay" style={{
         position: 'fixed',

@@ -26,9 +26,9 @@
       <button class="nav-btn" onclick="showPage('page-records')">學習紀錄</button>
       <button class="nav-btn" onclick="showPage('page-profile')">個人檔案</button>
       <div class="dark-frame"></div>
-      <button class="nav-btn2">任務</button>
-      <button class="nav-btn2">旅行</button>
-      <button class="nav-btn2">徽章</button>
+      <button class="nav-btn2"onclick="showPage('page-mission')">任務</button>
+      <button class="nav-btn2" onclick="showPage('page-adventure')">旅行</button>
+      <button class="nav-btn2"onclick="showPage('page-badge')">徽章</button>
       <button class="nav-btn2">物品庫</button>
     </div>
     <!-- 主區塊：標題列+內容 -->
@@ -38,7 +38,7 @@
         <div class="ball" style="right:36px;"></div>
         <span class="main-title">軟體應用丙級</span>
         <div class="right-btn-group" style="z-index: 2;">
-          <button class="challenge-btn">挑戰</button>
+          <button class="challenge-btn" onclick="showChallengeModal()">挑戰</button>
           <button class="bell-btn">🔔</button>
         </div>
       </div>
@@ -90,6 +90,11 @@
           <h2>個人檔案</h2>
           <p>這裡是個人檔案內容。</p>
         </div>
+        <!-- 旅行頁面 -->
+        <div id="page-adventure" style="display:none;">
+          <h2>旅行</h2>
+          <p>這裡是旅行內容。</p>
+        </div>
         <!-- 課堂 -->
         <div id="page-lesson" style="display:none;">
           <div class="lesson-header">
@@ -107,6 +112,16 @@
           </div>
           <button class="lesson-btn" style="margin: 20px;" onclick="showPage('page-courses')">回課程列表</button>
         </div>
+        <!-- 任務頁面 -->
+        <div id="page-mission" style="display:none;">
+          <h2>任務</h2>
+          <p>這裡是任務內容。</p>
+        </div>
+        <!-- 徽章頁面 -->
+        <div id="page-badge" style="display:none;">
+          <h2>徽章</h2>
+          <p>這裡是徽章內容。</p>
+        </div>
         <!-- 其他頁面依此類推... -->
       </div>
     </div>
@@ -116,15 +131,21 @@
       <div class="dark-frame" style="visibility:hidden; margin-left: 11px;"></div>
       <div class="section-title">社群</div>
       <div class="dark-frame" style="margin-left: 11px;"></div>
-      <button class="group-btn disabled-btn">單元討論區</button>
-      <button class="group-btn disabled-btn">作品</button>
-      <button class="group-btn disabled-btn">好友</button>
-      <button class="group-btn disabled-btn">社群小組</button>
-      <button class="group-btn disabled-btn">排行榜</button>
-      <button class="group-btn disabled-btn">AI學伴</button>
+      <button class="group-btn disabled-btn">討論區</button>
+      <button class="nav-btn2">作品</button>
+      <button class="nav-btn2">好友</button>
+      <button class="nav-btn2">排行榜</button>
+      <button class="nav-btn2">AI學伴</button>
       <div class="dark-frame" style="margin-left: 11px;"></div>
       <div class="ad">廣告</div>
     </div>
+  </div>
+
+  <!-- 挑戰小視窗 Modal -->
+  <div id="challenge-modal" style="display:none; position: fixed; left: 50%; top: 70%; transform: translate(-50%, 0); min-width: 320px; min-height: 120px; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); z-index: 9999; padding: 24px 32px; text-align: center;">
+    <h3 style="margin-bottom: 16px;">挑戰！</h3>
+    <p>這裡是挑戰視窗內容。</p>
+    <button onclick="closeChallengeModal()" style="margin-top: 18px;" class="lesson-btn">關閉</button>
   </div>
 
   <script>
@@ -141,7 +162,7 @@
     };
 
     function showPage(pageId, lessonId) {
-      const pages = ['page-home', 'page-notes', 'page-courses', 'page-records', 'page-lesson','page-profile'];
+      const pages = ['page-home', 'page-notes', 'page-courses', 'page-records', 'page-lesson','page-profile','page-adventure','page-mission','page-badge'];
       pages.forEach(id => {
         document.getElementById(id).style.display = (id === pageId) ? '' : 'none';
       });
@@ -150,6 +171,32 @@
         document.getElementById('lesson-title').textContent = lessons[lessonId].title;
         document.getElementById('lesson-desc').textContent = lessons[lessonId].desc;
       }
+    }
+
+    function showChallengeModal() {
+      // 聚焦遮罩
+      let mask = document.getElementById('challenge-mask');
+      if (!mask) {
+        mask = document.createElement('div');
+        mask.id = 'challenge-mask';
+        mask.style.position = 'fixed';
+        mask.style.left = '0';
+        mask.style.top = '0';
+        mask.style.width = '100vw';
+        mask.style.height = '100vh';
+        mask.style.background = 'rgba(0,0,0,0.35)';
+        mask.style.zIndex = '9998';
+        mask.onclick = closeChallengeModal;
+        document.body.appendChild(mask);
+      } else {
+        mask.style.display = '';
+      }
+      document.getElementById('challenge-modal').style.display = '';
+    }
+    function closeChallengeModal() {
+      document.getElementById('challenge-modal').style.display = 'none';
+      let mask = document.getElementById('challenge-mask');
+      if (mask) mask.style.display = 'none';
     }
 
   </script>

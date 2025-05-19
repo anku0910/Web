@@ -53,11 +53,12 @@ body {
   left: 1045px;
   width: 10px;
   /* 邊框寬度 */
-  height: 85%;
+  height: 86%;
   max-height: 800px;
   /* 邊框長度 */
   background-color: #C47323;
   border-radius: 0 0px 0px 0;
+  box-shadow: -4px 0 12px #a3492833;
   /* 可選圓角 */
 }
 
@@ -82,10 +83,11 @@ body {
   right: 1045px;
   width: 10px;
   /* 邊框寬度 */
-  height: 85%;
+  height: 86%;
   max-height: 800px;
   /* 邊框長度 */
   background-color: #C47323;
+  box-shadow: 4px 0 12px #a3492833;
   border-radius: 0 0px 0px 0;
   /* 可選圓角 */
 }

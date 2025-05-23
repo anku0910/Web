@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)file:///C:/Users/c1348/Documents/GitHub/Web/public/Main.html -->
+<html lang="zh-Hant">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>軟體應用丙級主畫面</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="./Main_files/bootstrap.min.css" rel="stylesheet">
+  <link href="./Main_files/css2" rel="stylesheet">
+  <link rel="stylesheet" href="Main.css">
+   <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
+  <style>
+    #webchat {
+    }
+    #webchat .bpWebchat {
+      position: unset;
+      width: 100%;
+      height: 95%;
+      max-height: 100%;
+      max-width: 100%;      
+    }
+
+    #webchat .bpFab {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main-card">
+    <!-- 側邊欄 -->
+    <div class="sidebar">
+      <div class="logo-box">
+        <img src="images/3/runing_cat.gif" alt="logo" class="logo-img">
+        <div class="logo-text">旅行中</div>
+      </div>
+      <div class="dark-frame" style="visibility:hidden"></div>
+      <button class="nav-btn" onclick="showPage('page-home')">首頁</button>
+      <button class="nav-btn" onclick="showPage('page-courses')">我的課程</button>
+      <button class="nav-btn" onclick="showPage('page-records')">學習紀錄</button>
+      <button class="nav-btn" onclick="showPage('page-profile')">個人檔案</button>
+      <div class="dark-frame"></div>
+      <button class="nav-btn2"onclick="showPage('page-mission')">任務</button>
+      <button class="nav-btn2" onclick="showPage('page-adventure')">旅行</button>
+      <button class="nav-btn2"onclick="showPage('page-badge')">徽章</button>
+      <button class="nav-btn2">物品庫</button>
+    </div>
+    <!-- 主區塊：標題列+內容 -->
+    <div class="main-area">
+      <div class="main-header">
+        <div class="ball" style="left:-30px;"></div>
+        <div class="ball" style="right:36px;"></div>
+        <span class="main-title">軟體應用丙級</span>
+        <div class="right-btn-group" style="z-index: 2;">
+          <button class="challenge-btn" onclick="showChallengeModal()">挑戰</button>
+          <button class="bell-btn">🔔</button>
+        </div>
+      </div>
+      <div class="dark-frame"
+        style="margin-left: 7px; background-color: #C47323; width: 128%; z-index: 5; align-self: center;"></div>
+      <div class="main-content" style="padding: 10px 40px;">
+        <!-- 我的課程 -->
+        <div id="page-courses">
+          <!-- ...原本我的課程內容... -->
+          <div class="lesson-list">
+            <div class="lesson-card">
+              <div class="lesson-title">電腦基礎概念與操作</div>
+              <div class="lesson-desc">介紹個人電腦的基本架構與組成，包含，桌面操作、輸入輸出設備、檔案類型、資料傳輸速度基本功能等。適合無基礎學員，建立使用電腦的基本技能和知識。</div>
+              <div class="lesson-meta">
+                <span>● 課程 初學者級</span>
+                <button class="lesson-btn" onclick="showPage('page-lesson', 'basic-pc')">上課</button>
+              </div>
+            </div>
+            <div class="lesson-card">
+              <div class="lesson-title">作業系統與檔案管理</div>
+              <div class="lesson-desc">介紹不同作業系統的架構與功能、使用者權限，學習如何管理檔案與資料夾，理解檔案系統的運作原理，並實務操作常用的檔案管理工具。</div>
+              <div class="lesson-meta">
+                <span>● 課程 初學者至新手級</span>
+                <button class="lesson-btn" onclick="showPage('page-lesson', 'os-file')">上課</button>                          
+              </div>                
+            </div>
+          </div>          
+          <div class="progress-bar">
+            <div class="progress-bar-inner" style="width:3%"></div>
+          </div>          
+        </div>        
+        <!-- 筆記 -->
+        <div id="page-notes" style="display:none;">
+          <h2>筆記</h2>
+          <p>這裡是筆記內容。</p>
+        </div>
+        <!-- 首頁 -->
+        <div id="page-home" style="display:none;">
+          <h2>首頁</h2>
+          <p>這裡是首頁內容。</p>
+        </div>
+        <!-- 學習紀錄 -->
+        <div id="page-records" style="display:none;">
+          <h2>學習紀錄</h2>
+          <p>這裡是學習紀錄內容。</p>
+        </div>
+        <!-- 個人檔案頁面 -->
+        <div id="page-profile" style="display:none;">
+          <h2>個人檔案</h2>
+          <p>這裡是個人檔案內容。</p>
+        </div>
+        <!-- 旅行頁面 -->
+        <div id="page-adventure" style="display:none;">
+          <h2>旅行</h2>
+          <p>這裡是旅行內容。</p>
+        </div>
+        <!-- 課堂 -->
+        <div id="page-lesson" style="display:none;">
+          <div class="lesson-header">
+            <div class="lesson-text">
+              <h2 id="lesson-title" style="font-size: 1.6rem; color: #FFF; letter-spacing: 2px; margin: 6px 0px;">
+                課堂名稱</h2>
+              <h4 id="lesson-desc" style="font-size: 1rem; color: #FFF; margin: 0;">課程內容會顯示在這裡。</h4>
+            </div>
+            <div class="progrress-frame" style="position: relative;">
+              <img src="images/3/Progress_Cat.png" style="width: 150%; height: 200%; z-index: 2;" alt="進度貓咪">
+                <div style="position: absolute; left: 70%; transform: translateX(-50%); bottom: -42px; width: 160px; height: 48px; background: #fff; border-radius: 8px; border: 4px solid #333; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: #333; box-shadow: 0 2px 8px rgba(0,0,0,0.08); font-weight: bold;">
+                目前進度：<span id="lesson-progress">0%</span>
+              </div>
+            </div>
+          </div>
+          <button class="lesson-btn" style="margin: 20px;" onclick="showPage('page-courses')">回課程列表</button>
+        </div>
+        <!-- 任務頁面 -->
+        <div id="page-mission" style="display:none;">
+          <h2>任務</h2>
+          <p>這裡是任務內容。</p>
+        </div>
+        <!-- 徽章頁面 -->
+        <div id="page-badge" style="display:none;">
+          <h2>徽章</h2>
+          <p>這裡是徽章內容。</p>
+        </div>
+        <!-- 其他頁面依此類推... -->
+      </div>
+    </div>
+    <!-- 右側欄 -->
+    <div class="rightbar">
+      <button class="unit-btn">切換單元</button>
+      <div class="dark-frame" style="visibility:hidden; margin-left: 11px;"></div>
+      <div class="section-title">社群</div>
+      <div class="dark-frame" style="margin-left: 11px;"></div>
+      <button class="group-btn disabled-btn">討論區</button>
+      <button class="nav-btn2">作品</button>
+      <button class="nav-btn2">好友</button>
+      <button class="nav-btn2">排行榜</button>
+      <button class="nav-btn2" onclick="openAIWebchat()">AI學伴</button>
+      <div class="dark-frame" style="margin-left: 11px;"></div>
+      <div class="ad">廣告</div>
+    </div>
+  </div>
+
+  <!-- 挑戰小視窗 Modal -->
+  <div id="challenge-modal" style="display:none; position: fixed; left: 50%; top: 60%; transform: translate(-50%, 0); min-width: 320px; min-height: 120px; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); z-index: 9999; padding: 24px 32px; text-align: center;">
+    <h3 style="margin-bottom: 8px;position: absolute;">挑戰！</h3>    
+    <div class="progress-bar">
+      <p style="position: relative; top: -16px; z-index: 2;">這裡是挑戰視窗內容。</p>
+      <div class="progress-bar-inner" style="width:100%"></div>
+    </div>
+    <button onclick="closeChallengeModal()" style="margin-top: 0px;" class="lesson-btn">關閉</button>
+  </div>
+    <!-- AI學伴  -->
+  <div id="webchat" style="z-index: 2; position:absolute; bottom: 0%; right:0dvi; width: 300px; height: 400px; display: none;"></div>
+  <script>
+    const lessons = {
+      'basic-pc': {
+        title: '電腦基礎概念與操作',
+        desc: '介紹個人電腦的基本架構與組成，包含桌面操作、輸入輸出設備、檔案類型、資料傳輸速度基本功能等。適合無基礎學員，建立使用電腦的基本技能和知識。'
+      },
+      'os-file': {
+        title: '作業系統與檔案管理',
+        desc: '介紹不同作業系統的架構與功能、使用者權限，學習如何管理檔案與資料夾，理解檔案系統的運作原理，並實務操作常用的檔案管理工具。'
+      }
+      // 你可以繼續新增更多課程資料
+    };
+
+    function showPage(pageId, lessonId) {
+      const pages = ['page-home', 'page-notes', 'page-courses', 'page-records', 'page-lesson','page-profile','page-adventure','page-mission','page-badge'];
+      pages.forEach(id => {
+        document.getElementById(id).style.display = (id === pageId) ? '' : 'none';
+      });
+
+      if (pageId === 'page-lesson' && lessonId && lessons[lessonId]) {
+        document.getElementById('lesson-title').textContent = lessons[lessonId].title;
+        document.getElementById('lesson-desc').textContent = lessons[lessonId].desc;
+      }
+    }
+      // 挑戰小視窗
+    function showChallengeModal() {
+      // 聚焦遮罩
+      let mask = document.getElementById('challenge-mask');
+      if (!mask) {
+        mask = document.createElement('div');
+        mask.id = 'challenge-mask';
+        mask.style.position = 'fixed';
+        mask.style.left = '0';
+        mask.style.top = '0';
+        mask.style.width = '100vw';
+        mask.style.height = '100vh';
+        mask.style.background = 'rgba(0,0,0,0.35)';
+        mask.style.zIndex = '9998';
+        mask.onclick = closeChallengeModal;
+        document.body.appendChild(mask);
+      } else {
+        mask.style.display = '';
+      }
+      document.getElementById('challenge-modal').style.display = '';
+    }
+    function closeChallengeModal() {
+      document.getElementById('challenge-modal').style.display = 'none';
+      let mask = document.getElementById('challenge-mask');
+      if (mask) mask.style.display = 'none';
+    }
+
+    function openAIWebchat() {
+      // 切換 webchat 顯示/隱藏
+      const webchatDiv = document.getElementById('webchat');
+      if (!webchatDiv) return;
+      if (webchatDiv.style.display === 'none' || webchatDiv.style.display === '') {
+        webchatDiv.style.display = '';
+        // 僅在 webchat ready 時開啟
+        if (window.botpress && typeof window.botpress.open === 'function') {
+          window.botpress.open();
+        }
+        webchatDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        webchatDiv.style.display = 'none';
+        // 可選：關閉 webchat 視窗（如有 close 方法）
+        if (window.botpress && typeof window.botpress.close === 'function') {
+          window.botpress.close();
+        }
+      }
+    }
+
+  </script>
+  <!-- Botpress 初始化腳本移到這裡 -->
+  <script>
+    window.botpress.on("webchat:ready", () => {
+      window.botpress.open();
+    });
+    window.botpress.init({
+      "botId": "8db1604b-6b48-4919-9a5c-4b3eb23948a4",
+      "configuration": {
+        "botName": "AI小老師",
+        "botAvatar": "https://files.bpcontent.cloud/2025/05/20/06/20250520062614-9U6T9BFK.png",
+        "fabImage": "https://files.bpcontent.cloud/2025/05/20/06/20250520062438-1O49HB49.png",
+        "website": {},
+        "email": {},
+        "phone": {},
+        "termsOfService": {},
+        "privacyPolicy": {},
+        "color": "#b75e14",
+        "variant": "soft",
+        "themeMode": "light",
+        "fontFamily": "ibm",
+        "radius": 3,
+        "additionalStylesheetUrl": "https://files.bpcontent.cloud/2025/05/20/06/20250520062811-KX8CLOG6.css"
+      },
+      "clientId": "51db9fc7-e92e-41f3-a0e2-d4105907deab",
+      "selector": "#webchat"
+    });
+  </script>
+</body>
+</html>

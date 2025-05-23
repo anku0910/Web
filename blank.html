@@ -1,120 +1,382 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>選擇課業</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #c08b5c; /* 棕色背景 */
-      background-image: linear-gradient(to bottom, #c08b5c 70%, #5c8d76 30%); /* 棕色漸變到綠色 */
+      background-color: #c08b5c;
+      background-image: url("images/2/bg1.png");
+      background-position: center;
+      background-size: cover;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
     }
-    
+
+
     .main-card {
-      background-color: #fef9d7; /* 淺黃色背景 */
-      border-radius: 30px;
-      border: 8px solid #c27b30; /* 棕色邊框 */
+      position: relative;
+      border-radius: 120px;
       padding: 30px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
       max-width: 900px;
       width: 100%;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     }
-    
+
+    .bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 100px;
+      transition: opacity 0.5s ease;
+      opacity: 0;
+      z-index: -1;
+    }
+
+    .bg-image-1 {
+      background-image: url('images/2/container1.png');
+      opacity: 1;
+      /* 預設顯示第一張 */
+    }
+
+    .bg-image-2 {
+      background-image: url('images/2/container2.png');
+    }
+
     .title {
+      font-family: 'Poppins', sans-serif;
       font-size: 2.5rem;
       font-weight: bold;
+      letter-spacing: 4px;
+      margin-top: 10px;
       margin-bottom: 10px;
+      transition: background-color 0.3s, color 0.3s;
     }
-    
+
     .subtitle {
+      font-family: 'Poppins', sans-serif;
       font-size: 2rem;
+      font-weight: bold;
       padding: 8px 0;
       position: relative;
       display: inline-block;
-      border-top: 2px solid #333;
-      border-bottom: 2px solid #333;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s, color 0.3s;
     }
-    
-    .option-btn {
+
+    .subtitle::before,
+    .subtitle::after {
+      content: '';
+      position: absolute;
+      height: 4px;
+      background-color: #333;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .subtitle::before {
+      top: 0;
+      width: 225%;
+      /* 上邊線寬度 */
+    }
+
+    .subtitle::after {
+      bottom: 0;
+      width: 350%;
+      /* 下邊線寬度 */
+    }
+
+    .subtitle.highlight::before,
+    .subtitle.highlight::after {
       background-color: white;
-      border: 3px solid #c27b30; /* 棕色邊框 */
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .center-buttons {
+      display: flex;
+      flex-direction: column;
+      /* 按鈕垂直排列 */
+      align-items: center;
+      /* 水平置中 */
+    }
+
+    .option-btn {
+      font-family: 'Poppins', sans-serif;
+      font-weight: bold;
+      background-color: white;
+      border: 5px solid #a34928;
+      padding: 4px;
+      /* 棕色邊框 */
       border-radius: 30px;
-      padding: 14px 30px;
       margin-bottom: 15px;
-      width: 100%;
-      font-size: 1.2rem;
+      width: 80%;
+      font-size: 1.7rem;
       text-align: center;
       transition: all 0.3s;
+      cursor: pointer;
     }
-    
-    .option-btn:hover {
+
+    /* focus 狀態樣式 */
+    .option-btn:focus {
+      background-color: #ff8133;
+      color: white;
+      outline: none;
+      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
+    }
+
+    /* hover 狀態，但排除已 focus 的按鈕 */
+    .option-btn:hover:not(:focus) {
       background-color: #ffecb3;
     }
-    
-    .cat-container {
-      background-color: #fef2cc; /* 淺黃色背景 */
-      border: 12px solid #daa520; /* 金色邊框 */
+
+    .option-btn.disabled-btn {
+      position: relative;
+      pointer-events: none;
+      /* 禁用按鈕功能 */
+      color: gray;
+      /* 可選：文字變灰表示不可用 */
+    }
+
+    .option-btn.disabled-btn::after {
+      content: '待開發';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      /* 半透明背景 */
+      color: white;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 1rem;
+      pointer-events: none;
+      /* 確保文字不影響滑鼠事件 */
+    }
+
+    .option-btn.disabled-btn:hover,
+    .option-btn.disabled-btn:focus {
+      background-color: white;
+      /* 移除 hover/focus 效果 */
+      border-color: #a34928;
+      cursor: default;
+      /* 游標改為預設 */
+    }
+
+    .confirm-btn {
+      font-family: 'Poppins', sans-serif;
+      font-weight: bold;
+      background-color: white;
+      border: 5px solid #198754;
+      padding: 2px;
+      /* 棕色邊框 */
       border-radius: 30px;
+      margin-bottom: 15px;
+      width: 40%;
+      font-size: 1.7rem;
+      text-align: center;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .confirm-btn:hover {
+      background-color: #198754;
+      color: white;
+    }
+
+    .cat-container {
+      position: relative;
+      /* 讓子元素絕對定位相對於此 */
+      background-color: #fef2cc;
+      border: 24px solid #c98825;
+      border-radius: 100px;
       overflow: hidden;
-      height: 220px;
+      width: 275px;
+      height: 400px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    
+
+    /* 兩張貓咪背景圖覆蓋 */
+    .cat-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 0px;
+      transition: opacity 0.5s ease;
+      opacity: 0;
+      z-index: 0;
+    }
+
+    .cat-image-1 {
+      background-image: url('images/2/Cat1.png');
+      opacity: 1;
+      /* 預設顯示第一張 */
+      z-index: 1;
+    }
+
+    .cat-image-2 {
+      background-image: url('images/2/Cat2.png');
+      z-index: 0;
+    }
+
+
+    /* 反白樣式 */
+    .highlight {
+      color: white;
+      border-radius: 4px;
+    }
+
     @media (max-width: 768px) {
       .title {
         font-size: 2rem;
       }
+
       .subtitle {
         font-size: 1.6rem;
       }
+
       .cat-container {
         height: 180px;
         margin-top: 20px;
       }
+
       .option-btn {
         padding: 10px 20px;
       }
     }
   </style>
 </head>
+
 <body>
   <div class="main-card">
+    <div class="bg-image bg-image-1"></div>
+    <div class="bg-image bg-image-2"></div>
     <div class="row">
-      <div class="col-md-7">
+      <div class="col-md-7" style="padding-left: 70px; padding-bottom: 20px; padding-top: 20px;">
         <div class="text-center mb-4">
           <h1 class="title">你想學甚麼？</h1>
           <h2 class="subtitle">IT人員</h2>
         </div>
-        
-        <div class="mb-4">
-          <button class="option-btn mb-3">電腦軟體應用丙級</button>
-          <button class="option-btn mb-3">電腦硬體裝修丙級</button>
-          <button class="option-btn mb-3">電腦軟體設計丙級</button>
+
+        <div class="center-buttons">
+          <button class="option-btn">電腦軟體應用丙級</button>
+          <button class="option-btn disabled-btn">電腦硬體裝修丙級</button>
+          <button class="option-btn disabled-btn">電腦軟體設計丙級</button>
         </div>
-        
+
         <div class="text-center">
-          <button class="btn btn-success btn-lg rounded-pill px-5 fw-bold">確認</button>
+          <button class="confirm-btn" id="confirm-btn">確認</button>
         </div>
       </div>
-      
+
       <div class="col-md-5 d-flex align-items-center justify-content-center">
         <div class="cat-container">
-          <!-- 這裡放置貓咪圖片 -->
-          <img src="images/2/Cat2.png" alt="引導貓咪" style="max-width: 100%; max-height: 200px;">
-          <!-- 如果沒有圖片可以先用下面的 div 代替 -->
-          <!-- <div class="text-center p-3">這裡放置貓咪圖片</div> -->
+          <div class="cat-image cat-image-1"></div>
+          <div class="cat-image cat-image-2"></div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- 轉場特效遮罩 -->
+  <div id="transition-overlay"
+    style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:radial-gradient(circle at 50% 50%, #b6db98 0%, #9bd0b0 100%);opacity:1;pointer-events:auto;z-index:9999;transition:opacity 0.7s;">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+      <svg width="80" height="80" viewBox="0 0 50 50">
+        <circle cx="25" cy="25" r="20" stroke="#6bac65" stroke-width="5" fill="none" stroke-linecap="round">
+          <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s"
+            repeatCount="indefinite" />
+        </circle>
+      </svg>
+    </div>
+  </div>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      setTimeout(function () {
+        const overlay = document.getElementById('transition-overlay');
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+      }, 700);
+    });
+  </script>
+  <script>
+    // 等待 DOM 載入完成
+    document.addEventListener('DOMContentLoaded', () => {
+      const title = document.querySelector('.title');
+      const subtitle = document.querySelector('.subtitle');
+      const bg1 = document.querySelector('.bg-image-1');
+      const bg2 = document.querySelector('.bg-image-2');
+      const cat1 = document.querySelector('.cat-image-1');
+      const cat2 = document.querySelector('.cat-image-2');
+      const buttons = document.querySelectorAll('.option-btn');
+      const container = document.querySelector('.center-buttons');
+
+      container.addEventListener('focusin', () => {
+        subtitle.classList.add('highlight');
+        subtitle.classList.add('highlight-border');
+        title.classList.add('highlight');
+      });
+
+      container.addEventListener('focusout', () => {
+        // 確認 container 內沒有其他 focus 的按鈕才移除
+        setTimeout(() => {
+          if (!container.contains(document.activeElement)) {
+            subtitle.classList.remove('highlight');
+            subtitle.classList.remove('highlight-border');
+            title.classList.remove('highlight');
+          }
+        }, 0);
+      });
+      buttons.forEach((btn, index) => {
+        btn.addEventListener('focus', () => {
+          bg1.style.opacity = '0';
+          bg2.style.opacity = '1';
+
+          cat1.style.opacity = '0';
+          cat2.style.opacity = '1';
+        });
+
+        btn.addEventListener('blur', () => {
+          bg1.style.opacity = '1';
+          bg2.style.opacity = '0';
+
+          cat1.style.opacity = '1';
+          cat2.style.opacity = '0';
+        });
+      });
+
+    });
+
+
+  </script>
+  <script>
+    document.getElementById('confirm-btn').addEventListener('click', function (e) {
+      e.preventDefault();
+      const overlay = document.getElementById('transition-overlay');
+      overlay.style.pointerEvents = 'auto';
+      overlay.style.opacity = '1';
+      setTimeout(function () {
+        window.location.href = 'Main.html';
+      }, 700);
+    });
+  </script>
 </body>
+
 </html>

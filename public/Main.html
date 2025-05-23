@@ -10,6 +10,22 @@
   <link href="./Main_files/bootstrap.min.css" rel="stylesheet">
   <link href="./Main_files/css2" rel="stylesheet">
   <link rel="stylesheet" href="Main.css">
+   <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
+  <style>
+    #webchat {
+    }
+    #webchat .bpWebchat {
+      position: unset;
+      width: 100%;
+      height: 95%;
+      max-height: 100%;
+      max-width: 100%;      
+    }
+
+    #webchat .bpFab {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -51,7 +67,7 @@
           <div class="lesson-list">
             <div class="lesson-card">
               <div class="lesson-title">電腦基礎概念與操作</div>
-              <div class="lesson-desc">介紹個人電腦的基本架構與組成，包含，桌面操作、輸入輸出設備、檔案類型、資料傳輸速度基本功能等。適合無基礎學員，建立使用電腦的基本技能和知識。</div>
+              <div class="lesson-desc">介紹個人電腦的基本架構與組成，包含，桌面操作、輸入輸出設備、檔案類型、多工處理基本功能等。適合無基礎學員，建立使用電腦的基本技能和知識。</div>
               <div class="lesson-meta">
                 <span>● 課程 初學者級</span>
                 <button class="lesson-btn" onclick="showPage('page-lesson', 'basic-pc')">上課</button>
@@ -62,14 +78,14 @@
               <div class="lesson-desc">介紹不同作業系統的架構與功能、使用者權限，學習如何管理檔案與資料夾，理解檔案系統的運作原理，並實務操作常用的檔案管理工具。</div>
               <div class="lesson-meta">
                 <span>● 課程 初學者至新手級</span>
-                <button class="lesson-btn" onclick="showPage('page-lesson', 'os-file')">上課</button>
-              </div>
+                <button class="lesson-btn" onclick="showPage('page-lesson', 'os-file')">上課</button>                          
+              </div>                
             </div>
-          </div>
-          <div class="progress-bar">
+          </div>          
+          <div class="progress-bar" >
             <div class="progress-bar-inner" style="width:3%"></div>
-          </div>
-        </div>
+          </div>          
+        </div>        
         <!-- 筆記 -->
         <div id="page-notes" style="display:none;">
           <h2>筆記</h2>
@@ -133,9 +149,9 @@
       <div class="dark-frame" style="margin-left: 11px;"></div>
       <button class="group-btn disabled-btn">討論區</button>
       <button class="nav-btn2">作品</button>
-      <button class="nav-btn2">好友</button>
-      <button class="nav-btn2">排行榜</button>
-      <button class="nav-btn2">AI學伴</button>
+      <button class="group-btn disabled-btn">好友</button>
+      <button class="group-btn disabled-btn">排行榜</button>
+      <button class="nav-btn2" onclick="openAIWebchat()">AI學伴</button>
       <div class="dark-frame" style="margin-left: 11px;"></div>
       <div class="ad">廣告</div>
     </div>
@@ -148,10 +164,10 @@
       <p style="position: relative; top: -16px; z-index: 2;">這裡是挑戰視窗內容。</p>
       <div class="progress-bar-inner" style="width:100%"></div>
     </div>
-
     <button onclick="closeChallengeModal()" style="margin-top: 0px;" class="lesson-btn">關閉</button>
   </div>
-
+    <!-- AI學伴  -->
+  <div id="webchat" style="z-index: 2; position:absolute; bottom: 0%; right:0dvi; width: 300px; height: 400px; display: none;"></div>
   <script>
     const lessons = {
       'basic-pc': {
@@ -203,7 +219,53 @@
       if (mask) mask.style.display = 'none';
     }
 
+    function openAIWebchat() {
+      // 切換 webchat 顯示/隱藏
+      const webchatDiv = document.getElementById('webchat');
+      if (!webchatDiv) return;
+      if (webchatDiv.style.display === 'none' || webchatDiv.style.display === '') {
+        webchatDiv.style.display = '';
+        // 僅在 webchat ready 時開啟
+        if (window.botpress && typeof window.botpress.open === 'function') {
+          window.botpress.open();
+        }
+        webchatDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        webchatDiv.style.display = 'none';
+        // 可選：關閉 webchat 視窗（如有 close 方法）
+        if (window.botpress && typeof window.botpress.close === 'function') {
+          window.botpress.close();
+        }
+      }
+    }
+
+  </script>
+  <!-- Botpress 初始化腳本移到這裡 -->
+  <script>
+    window.botpress.on("webchat:ready", () => {
+      window.botpress.open();
+    });
+    window.botpress.init({
+      "botId": "8db1604b-6b48-4919-9a5c-4b3eb23948a4",
+      "configuration": {
+        "botName": "AI小老師",
+        "botAvatar": "https://files.bpcontent.cloud/2025/05/20/06/20250520062614-9U6T9BFK.png",
+        "fabImage": "https://files.bpcontent.cloud/2025/05/20/06/20250520062438-1O49HB49.png",
+        "website": {},
+        "email": {},
+        "phone": {},
+        "termsOfService": {},
+        "privacyPolicy": {},
+        "color": "#b75e14",
+        "variant": "soft",
+        "themeMode": "light",
+        "fontFamily": "ibm",
+        "radius": 3,
+        "additionalStylesheetUrl": "https://files.bpcontent.cloud/2025/05/20/06/20250520062811-KX8CLOG6.css"
+      },
+      "clientId": "51db9fc7-e92e-41f3-a0e2-d4105907deab",
+      "selector": "#webchat"
+    });
   </script>
 </body>
-
 </html>

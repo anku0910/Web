@@ -127,6 +127,13 @@
       cursor: pointer;
     }
 
+    .option-btn.active {
+      background-color: #ff8133 !important;
+      color: white !important;
+      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
+    }
+
+
     /* focus 狀態樣式 */
     .option-btn:focus {
       background-color: #ff8133;
@@ -328,24 +335,24 @@
       const buttons = document.querySelectorAll('.option-btn');
       const container = document.querySelector('.center-buttons');
 
-      container.addEventListener('focusin', () => {
-        subtitle.classList.add('highlight');
-        subtitle.classList.add('highlight-border');
-        title.classList.add('highlight');
-      });
+      // 移除 container 的 focusin 和 focusout 事件
+      // container.addEventListener('focusin', () => {...});
+      // container.addEventListener('focusout', () => {...});
 
-      container.addEventListener('focusout', () => {
-        // 確認 container 內沒有其他 focus 的按鈕才移除
-        setTimeout(() => {
-          if (!container.contains(document.activeElement)) {
-            subtitle.classList.remove('highlight');
-            subtitle.classList.remove('highlight-border');
-            title.classList.remove('highlight');
-          }
-        }, 0);
-      });
-      buttons.forEach((btn, index) => {
-        btn.addEventListener('focus', () => {
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          // 移除其他按鈕的 active
+          buttons.forEach(b => b.classList.remove('active'));
+
+          // 加上當前按鈕的 active
+          btn.classList.add('active');
+
+          // 加上標題區 highlight
+          subtitle.classList.add('highlight');
+          subtitle.classList.add('highlight-border');
+          title.classList.add('highlight');
+
+          // 背景圖片切換
           bg1.style.opacity = '0';
           bg2.style.opacity = '1';
 
@@ -353,16 +360,17 @@
           cat2.style.opacity = '1';
         });
 
-        btn.addEventListener('blur', () => {
-          bg1.style.opacity = '1';
-          bg2.style.opacity = '0';
-
-          cat1.style.opacity = '1';
-          cat2.style.opacity = '0';
-        });
+        // 建議移除 focus/blur 事件，避免狀態被覆蓋
+        btn.removeEventListener('focus', () => { });
+        btn.removeEventListener('blur', () => { });
       });
 
+
+
+
+
     });
+
 
 
   </script>

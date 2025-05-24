@@ -25,6 +25,46 @@
     #webchat .bpFab {
       display: none;
     }
+
+    .card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 8px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .unit-content-frame {
+      background: #fff;
+      border-radius: 8px;
+      padding: 18px 24px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #f3f3f3;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+
+    .progress-bar-inner {
+      height: 100%;
+      background: #4caf50;
+      width: 0;
+      transition: width 0.4s;
+    }
+
+    /* 其他現有樣式保持不變 */
   </style>
 </head>
 
@@ -126,7 +166,7 @@
               </div>
             </div>
           </div>
-          <div id="lesson-units" style="margin: 20px 0; display: flex; flex-direction: column; gap: 10px; width: 220px; align-items: flex-start;"></div>
+          <div id="lesson-units" class="wrapper" style="margin: 20px 0;"></div>
           <div class="unit-content-frame" style="background: #fff; border-radius: 8px; padding: 18px 24px; margin-bottom: 20px;">
             <h3 id="unit-title" style="color: #b75e14; font-size: 1.2rem; margin-bottom: 8px;">單元標題</h3>
             <div id="unit-content" style="color: #333; font-size: 1rem;">單元內容會顯示在這裡。</div>
@@ -211,10 +251,10 @@
       if (pageId === 'page-lesson' && lessonId && lessons[lessonId]) {
         document.getElementById('lesson-title').textContent = lessons[lessonId].title;
         document.getElementById('lesson-desc').textContent = lessons[lessonId].desc;
-        // 動態產生單元列表
+        // 動態產生單元卡片
         let unitListHtml = '';
         lessons[lessonId].units.forEach((unit, idx) => {
-          unitListHtml += `<button class="lesson-btn" onclick="showUnit('${lessonId}', ${idx})">${unit.title}</button>`;
+          unitListHtml += `<div class="card" onclick="showUnit('${lessonId}', ${idx})">${unit.title}</div>`;
         });
         document.getElementById('lesson-units').innerHTML = unitListHtml;
         // 預設顯示第一個單元內容

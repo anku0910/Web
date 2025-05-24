@@ -540,3 +540,21 @@ position: relative;
   align-items: center;
   justify-content: center;
 }
+
+.wrapper{
+  display: flex;
+  gap: 20px;
+  width: 300px;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+}
+.card{
+  scroll-snap-align: center;
+  box-sizing: border-box;
+  padding: 20px 30px;
+  flex-shrink: 0;
+  width: 300px;
+  background-color: white;
+  border-radius: 14px;
+  text-align: center;
+}

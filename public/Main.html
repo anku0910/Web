@@ -240,6 +240,19 @@
         desc: '介紹個人電腦的基本架構與組成，包含桌面操作、輸入輸出設備、檔案類型、資料傳輸速度基本功能等。適合無基礎學員，建立使用電腦的基本技能和知識。',
         units: [
           { title: '單元一：電腦的組成', content: '本單元介紹電腦的基本組成，包括主機、螢幕、鍵盤、滑鼠等。' },
+          // 新增互動式表格子單元
+          { 
+            title: '單元一-1：輸入/輸出設備互動表格', 
+            content: `<div id="interactive-table-frame" style='margin: 12px 0;'>
+              <div style="border:2px solid #b75e14; border-radius:12px; padding:16px; background:#fff;">
+                <h4 style="color:#b75e14;">輸入/輸出設備互動表格</h4>
+                <div id="drag-table-container"></div>
+                <div style="margin-top:12px;">
+                  <span style="font-size:0.95em;color:#888;">提示：拖曳下方裝置到正確分類框中。</span>
+                </div>
+              </div>
+            </div>`
+          },
           { title: '單元二：桌面操作', content: '學習如何操作桌面、開啟程式、管理視窗。' },
           { title: '單元三：輸入輸出設備', content: '認識各種輸入與輸出設備，例如滑鼠、鍵盤、印表機、螢幕等。' },
           { title: '單元四：檔案類型', content: '了解常見的檔案類型與副檔名，如何辨識與管理。' },
@@ -295,10 +308,132 @@
     function showUnit(lessonId, unitIdx) {
       const unit = lessons[lessonId].units[unitIdx];
       document.getElementById('unit-title').textContent = unit.title;
-      document.getElementById('unit-content').textContent = unit.content;
+      // 判斷是否為互動表格單元
+      if (unit.title.indexOf('互動表格') !== -1) {
+        document.getElementById('unit-content').innerHTML = unit.content;
+        renderInteractiveTableV2();
+      } else {
+        document.getElementById('unit-content').textContent = unit.content;
+      }
       // 高亮目前按鈕
       const btns = document.querySelectorAll('.unit-btn');
       btns.forEach((btn, idx) => btn.classList.toggle('active', idx === unitIdx));
+    }
+
+    // 新版互動式表格JS
+    function renderInteractiveTableV2() {
+      const container = document.getElementById('drag-table-container');
+      if (!container) return;
+      container.innerHTML = `
+        <div id="table-frame-move" style="display:inline-block; border:2px dashed #b75e14; border-radius:10px; padding:12px; background:#fff; cursor:move;">
+          <table style="border-collapse:collapse;width:100%;max-width:420px;">
+            <tr>
+              <th style="border:1px solid #b75e14;padding:8px 12px;background:#ffe5c2;">滑鼠</th>
+              <th style="border:1px solid #b75e14;padding:8px 12px;background:#ffe5c2;">鍵盤</th>
+            </tr>
+            <tr>
+              <td id="frame-mouse" class="drop-frame" style="border:1px solid #b75e14;height:60px;min-width:80px;"></td>
+              <td id="frame-keyboard" class="drop-frame" style="border:1px solid #b75e14;height:60px;min-width:80px;"></td>
+            </tr>
+            <tr>
+              <th style="border:1px solid #b75e14;padding:8px 12px;background:#e7f7e7;" colspan="2">輸入設備</th>
+            </tr>
+            <tr>
+              <td id="frame-input" class="drop-frame" colspan="2" style="border:1px solid #b75e14;height:60px;"></td>
+            </tr>
+            <tr>
+              <th style="border:1px solid #b75e14;padding:8px 12px;background:#e7eaff;">螢幕</th>
+              <th style="border:1px solid #b75e14;padding:8px 12px;background:#e7eaff;">喇叭</th>
+            </tr>
+            <tr>
+              <td id="frame-screen" class="drop-frame" style="border:1px solid #b75e14;height:60px;min-width:80px;"></td>
+              <td id="frame-speaker" class="drop-frame" style="border:1px solid #b75e14;height:60px;min-width:80px;"></td>
+            </tr>
+            <tr>
+              <th style="border:1px solid #b75e14;padding:8px 12px;background:#f7e7e7;" colspan="2">輸出設備</th>
+            </tr>
+            <tr>
+              <td id="frame-output" class="drop-frame" colspan="2" style="border:1px solid #b75e14;height:60px;"></td>
+            </tr>
+          </table>
+        </div>
+        <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;">
+          <div class="draggable-cell" draggable="true" data-type="mouse" style="border:1px solid #888;padding:6px 18px;border-radius:8px;cursor:grab;background:#f7f7f7;">滑鼠</div>
+          <div class="draggable-cell" draggable="true" data-type="keyboard" style="border:1px solid #888;padding:6px 18px;border-radius:8px;cursor:grab;background:#f7f7f7;">鍵盤</div>
+          <div class="draggable-cell" draggable="true" data-type="input" style="border:1px solid #888;padding:6px 18px;border-radius:8px;cursor:grab;background:#f7f7f7;">輸入設備</div>
+          <div class="draggable-cell" draggable="true" data-type="screen" style="border:1px solid #888;padding:6px 18px;border-radius:8px;cursor:grab;background:#f7f7f7;">螢幕</div>
+          <div class="draggable-cell" draggable="true" data-type="speaker" style="border:1px solid #888;padding:6px 18px;border-radius:8px;cursor:grab;background:#f7f7f7;">喇叭</div>
+          <div class="draggable-cell" draggable="true" data-type="output" style="border:1px solid #888;padding:6px 18px;border-radius:8px;cursor:grab;background:#f7f7f7;">輸出設備</div>
+        </div>
+      `;
+
+      // 拖拉事件
+      container.querySelectorAll('.draggable-cell').forEach(cell => {
+        cell.addEventListener('dragstart', e => {
+          e.dataTransfer.setData('text/plain', cell.outerHTML);
+          setTimeout(() => cell.style.visibility = 'hidden', 0);
+        });
+        cell.addEventListener('dragend', e => {
+          cell.style.visibility = '';
+        });
+      });
+
+      container.querySelectorAll('.drop-frame').forEach(frame => {
+        frame.addEventListener('dragover', e => {
+          e.preventDefault();
+          frame.style.background = '#fffbe6';
+        });
+        frame.addEventListener('dragleave', e => {
+          frame.style.background = '';
+        });
+        frame.addEventListener('drop', e => {
+          e.preventDefault();
+          frame.style.background = '';
+          const html = e.dataTransfer.getData('text/plain');
+          if (html) {
+            // 僅允許一個cell
+            frame.innerHTML = html;
+            // 重新掛載拖拉事件
+            const dropped = frame.querySelector('.draggable-cell');
+            if (dropped) {
+              dropped.addEventListener('dragstart', ev => {
+                ev.dataTransfer.setData('text/plain', dropped.outerHTML);
+                setTimeout(() => dropped.style.visibility = 'hidden', 0);
+              });
+              dropped.addEventListener('dragend', ev => {
+                dropped.style.visibility = '';
+              });
+            }
+          }
+        });
+      });
+
+      // 讓整個表格框可移動
+      const tableFrame = document.getElementById('table-frame-move');
+      let isDragging = false, startX = 0, startY = 0, origX = 0, origY = 0;
+      tableFrame.addEventListener('mousedown', function(e) {
+        if (e.target !== tableFrame) return;
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        const rect = tableFrame.getBoundingClientRect();
+        origX = rect.left;
+        origY = rect.top;
+        tableFrame.style.position = 'fixed';
+        tableFrame.style.zIndex = 99;
+        document.body.style.userSelect = 'none';
+      });
+      document.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        tableFrame.style.left = (origX + e.clientX - startX) + 'px';
+        tableFrame.style.top = (origY + e.clientY - startY) + 'px';
+      });
+      document.addEventListener('mouseup', function() {
+        if (isDragging) {
+          isDragging = false;
+          document.body.style.userSelect = '';
+        }
+      });
     }
       // 挑戰小視窗
     function showChallengeModal() {

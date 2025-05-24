@@ -76,6 +76,31 @@
       background: #b75e14;
       transform: scale(1.08);
     }
+    .subunit-btn {
+      min-width: 72px;
+      height: 36px;
+      border: none;
+      border-radius: 18px;
+      background: #eee;
+      color: #b75e14;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.1s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      outline: none;
+      padding: 0 18px;
+      margin-right: 0;
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .subunit-btn.active, .subunit-btn:focus {
+      background: #b75e14;
+      color: #fff;
+      transform: scale(1.06);
+    }
     /* 其他現有樣式保持不變 */
   </style>
 </head>
@@ -180,10 +205,9 @@
           </div>
           <div id="lesson-units" class="unit-btns-wrapper"></div>
           <div class="unit-content-frame" style="background: #fff; border-radius: 8px; padding: 18px 24px; margin-bottom: 20px;">
-            <h3 id="unit-title" style="color: #b75e14; font-size: 1.2rem; margin-bottom: 8px;">單元標題</h3>
+            <h3 id="unit-title" style="color: #b75e14; font-size: 1.2rem; margin-bottom: 8px; margin-top: 0;">單元標題</h3>
             <div id="unit-content" style="color: #333; font-size: 1rem;">單元內容會顯示在這裡。</div>
           </div>
-          <button class="lesson-btn" style="margin: 20px;" onclick="showPage('page-courses')">回課程列表</button>
         </div>
         <!-- 任務頁面 -->
         <div id="page-mission" style="display:none;">
@@ -239,19 +263,20 @@
         title: '電腦基礎概念與操作',
         desc: '介紹個人電腦的基本架構與組成，包含桌面操作、輸入輸出設備、檔案類型、資料傳輸速度基本功能等。適合無基礎學員，建立使用電腦的基本技能和知識。',
         units: [
-          { title: '單元一：電腦的組成', content: '本單元介紹電腦的基本組成，包括主機、螢幕、鍵盤、滑鼠等。' },
-          // 新增互動式表格子單元
           { 
-            title: '單元一-1：輸入/輸出設備互動表格', 
-            content: `<div id="interactive-table-frame" style='margin: 12px 0;'>
-              <div style="border:2px solid #b75e14; border-radius:12px; padding:16px; background:#fff;">
-                <h4 style="color:#b75e14;">輸入/輸出設備互動表格</h4>
-                <div id="drag-table-container"></div>
-                <div style="margin-top:12px;">
-                  <span style="font-size:0.95em;color:#888;">提示：拖曳下方裝置到正確分類框中。</span>
+            title: '單元一：電腦的組成', 
+            content: `
+              <div>
+                <div style="margin-bottom:16px; display: flex; gap: 12px; flex-wrap: wrap;">
+                  <button class="subunit-btn" id="subunit-btn-0" onclick="showSubUnit(0)">主機</button>
+                  <button class="subunit-btn" id="subunit-btn-1" onclick="showSubUnit(1)">螢幕</button>
+                  <button class="subunit-btn" id="subunit-btn-2" onclick="showSubUnit(2)">鍵盤</button>
+                  <button class="subunit-btn" id="subunit-btn-3" onclick="showSubUnit(3)">滑鼠</button>
+                  <button class="subunit-btn" id="subunit-btn-4" onclick="showSubUnit(4)">互動表格</button>
                 </div>
+                <div id="subunit-content"></div>
               </div>
-            </div>`
+            `
           },
           { title: '單元二：桌面操作', content: '學習如何操作桌面、開啟程式、管理視窗。' },
           { title: '單元三：輸入輸出設備', content: '認識各種輸入與輸出設備，例如滑鼠、鍵盤、印表機、螢幕等。' },
@@ -308,8 +333,11 @@
     function showUnit(lessonId, unitIdx) {
       const unit = lessons[lessonId].units[unitIdx];
       document.getElementById('unit-title').textContent = unit.title;
-      // 判斷是否為互動表格單元
-      if (unit.title.indexOf('互動表格') !== -1) {
+      // 判斷是否為"單元一：電腦的組成"
+      if (unit.title.indexOf('電腦的組成') !== -1) {
+        document.getElementById('unit-content').innerHTML = unit.content;
+        showSubUnit(0); // 預設顯示第一個子單元
+      } else if (unit.title.indexOf('互動表格') !== -1) {
         document.getElementById('unit-content').innerHTML = unit.content;
         renderInteractiveTableV2();
       } else {
@@ -320,50 +348,75 @@
       btns.forEach((btn, idx) => btn.classList.toggle('active', idx === unitIdx));
     }
 
+    // 單元一子單元內容
+    const subUnitContents = [
+      '主機：電腦的核心部件，負責資料處理與運算。',
+      '螢幕：顯示電腦輸出的資訊，屬於輸出設備。',
+      '鍵盤：常見的輸入設備，用於輸入文字與指令。',
+      '滑鼠：常見的輸入設備，用於控制游標與操作介面。',
+      // 互動表格子單元
+      `<div id="interactive-table-frame" style='margin: 12px 0;'>
+        <div style="border:2px solid #b75e14; border-radius:12px; padding:16px; background:#fff;">
+          <div id="drag-table-container"></div>
+          <div style="margin-top:12px;">
+            <span style="font-size:0.95em;color:#888;">提示：拖曳下方裝置到正確分類框中。</span>
+          </div>
+        </div>
+      </div>`
+    ];
+
+    // 切換單元一子單元
+    function showSubUnit(idx) {
+      const sub = document.getElementById('subunit-content');
+      if (!sub) return;
+      sub.innerHTML = subUnitContents[idx];
+      // 高亮目前子單元按鈕
+      for (let i = 0; i < 5; i++) {
+        const btn = document.getElementById('subunit-btn-' + i);
+        if (btn) btn.classList.toggle('active', i === idx);
+      }
+      if (idx === 4) renderInteractiveTableV2();
+    }
+
     // 新版互動式表格JS
     function renderInteractiveTableV2() {
       const container = document.getElementById('drag-table-container');
       if (!container) return;
       container.innerHTML = `
-        <div id="table-frame-move" style="display:inline-block; border:2px dashed #b75e14; border-radius:10px; padding:12px; background:#fff; cursor:move;">
-          <table style="border-collapse:collapse;width:100%;max-width:420px;">
-            <tr>
-              <th style="border:1px solid #b75e14;padding:8px 12px;background:#ffe5c2;">滑鼠</th>
-              <th style="border:1px solid #b75e14;padding:8px 12px;background:#ffe5c2;">鍵盤</th>
-            </tr>
-            <tr>
-              <td id="frame-mouse" class="drop-frame" style="border:1px solid #b75e14;height:60px;min-width:80px;"></td>
-              <td id="frame-keyboard" class="drop-frame" style="border:1px solid #b75e14;height:60px;min-width:80px;"></td>
-            </tr>
-            <tr>
-              <th style="border:1px solid #b75e14;padding:8px 12px;background:#e7f7e7;" colspan="2">輸入設備</th>
-            </tr>
-            <tr>
-              <td id="frame-input" class="drop-frame" colspan="2" style="border:1px solid #b75e14;height:60px;"></td>
-            </tr>
-            <tr>
-              <th style="border:1px solid #b75e14;padding:8px 12px;background:#e7eaff;">螢幕</th>
-              <th style="border:1px solid #b75e14;padding:8px 12px;background:#e7eaff;">喇叭</th>
-            </tr>
-            <tr>
-              <td id="frame-screen" class="drop-frame" style="border:1px solid #b75e14;height:60px;min-width:80px;"></td>
-              <td id="frame-speaker" class="drop-frame" style="border:1px solid #b75e14;height:60px;min-width:80px;"></td>
-            </tr>
-            <tr>
-              <th style="border:1px solid #b75e14;padding:8px 12px;background:#f7e7e7;" colspan="2">輸出設備</th>
-            </tr>
-            <tr>
-              <td id="frame-output" class="drop-frame" colspan="2" style="border:1px solid #b75e14;height:60px;"></td>
-            </tr>
-          </table>
-        </div>
-        <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;">
-          <div class="draggable-cell" draggable="true" data-type="mouse" style="border:1px solid #888;padding:6px 18px;border-radius:8px;cursor:grab;background:#f7f7f7;">滑鼠</div>
-          <div class="draggable-cell" draggable="true" data-type="keyboard" style="border:1px solid #888;padding:6px 18px;border-radius:8px;cursor:grab;background:#f7f7f7;">鍵盤</div>
-          <div class="draggable-cell" draggable="true" data-type="input" style="border:1px solid #888;padding:6px 18px;border-radius:8px;cursor:grab;background:#f7f7f7;">輸入設備</div>
-          <div class="draggable-cell" draggable="true" data-type="screen" style="border:1px solid #888;padding:6px 18px;border-radius:8px;cursor:grab;background:#f7f7f7;">螢幕</div>
-          <div class="draggable-cell" draggable="true" data-type="speaker" style="border:1px solid #888;padding:6px 18px;border-radius:8px;cursor:grab;background:#f7f7f7;">喇叭</div>
-          <div class="draggable-cell" draggable="true" data-type="output" style="border:1px solid #888;padding:6px 18px;border-radius:8px;cursor:grab;background:#f7f7f7;">輸出設備</div>
+        <div style="display: flex; align-items: flex-start; gap: 24px;">
+          <div id="table-frame-move" style="display:inline-block; border:2px dashed #b75e14; border-radius:10px; padding:12px; background:#fff; cursor:move;">
+            <table style="border-collapse:collapse;width:100%;max-width:420px;">
+              <tr>
+            <th style="border:1px solid #b75e14;padding:8px 12px;background:#ffe5c2;">滑鼠</th>
+            <th style="border:1px solid #b75e14;padding:8px 12px;background:#ffe5c2;">鍵盤</th>
+            <th style="border:1px solid #b75e14;padding:8px 12px;background:#e7eaff;">螢幕</th>
+            <th style="border:1px solid #b75e14;padding:8px 12px;background:#e7eaff;">喇叭</th>
+              </tr>
+              <tr>
+            <td id="frame-mouse" class="drop-frame" style="border:1px solid #b75e14;height:60px;min-width:80px;"></td>
+            <td id="frame-keyboard" class="drop-frame" style="border:1px solid #b75e14;height:60px;min-width:80px;"></td>
+            <td id="frame-screen" class="drop-frame" style="border:1px solid #b75e14;height:60px;min-width:80px;"></td>
+            <td id="frame-speaker" class="drop-frame" style="border:1px solid #b75e14;height:60px;min-width:80px;"></td>
+              </tr>
+              <tr>
+            <th style="border:1px solid #b75e14;padding:8px 12px;background:#e7f7e7;" colspan="2">輸入設備</th>
+            <th style="border:1px solid #b75e14;padding:8px 12px;background:#f7e7e7;" colspan="2">輸出設備</th>
+              </tr>
+              <tr>
+            <td id="frame-input" class="drop-frame" colspan="2" style="border:1px solid #b75e14;height:60px;"></td>
+            <td id="frame-output" class="drop-frame" colspan="2" style="border:1px solid #b75e14;height:60px;"></td>
+              </tr>
+            </table>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px;min-width:40px;">
+            <div class="draggable-cell" draggable="true" data-type="mouse" style="border:1px solid #888;padding:6px 8px;border-radius:8px;cursor:grab;background:#f7f7f7;min-width:40px;text-align:center;">滑鼠</div>
+            <div class="draggable-cell" draggable="true" data-type="keyboard" style="border:1px solid #888;padding:6px 8px;border-radius:8px;cursor:grab;background:#f7f7f7;min-width:40px;text-align:center;">鍵盤</div>
+            <div class="draggable-cell" draggable="true" data-type="input" style="border:1px solid #888;padding:6px 8px;border-radius:8px;cursor:grab;background:#f7f7f7;min-width:40px;text-align:center;">輸入設備</div>
+            <div class="draggable-cell" draggable="true" data-type="screen" style="border:1px solid #888;padding:6px 8px;border-radius:8px;cursor:grab;background:#f7f7f7;min-width:40px;text-align:center;">螢幕</div>
+            <div class="draggable-cell" draggable="true" data-type="speaker" style="border:1px solid #888;padding:6px 8px;border-radius:8px;cursor:grab;background:#f7f7f7;min-width:40px;text-align:center;">喇叭</div>
+            <div class="draggable-cell" draggable="true" data-type="output" style="border:1px solid #888;padding:6px 8px;border-radius:8px;cursor:grab;background:#f7f7f7;min-width:40px;text-align:center;">輸出設備</div>
+            </div>
+          </div>
         </div>
       `;
 

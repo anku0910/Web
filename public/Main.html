@@ -205,7 +205,7 @@
           </div>
           <div id="lesson-units" class="unit-btns-wrapper"></div>
           <div class="unit-content-frame" style="background: #fff; border-radius: 8px; padding: 18px 24px; margin-bottom: 20px;">
-            <h3 id="unit-title" style="color: #b75e14; font-size: 1.2rem; margin-bottom: 8px; margin-top: 0;">單元標題</h3>
+            <h3 id="unit-title" style="color: #b75e14; font-size: 1.2rem; margin-bottom: 8px;">單元標題</h3>
             <div id="unit-content" style="color: #333; font-size: 1rem;">單元內容會顯示在這裡。</div>
           </div>
         </div>
@@ -350,22 +350,53 @@
 
     // 單元一子單元內容
     const subUnitContents = [
-      '主機：電腦的核心部件，負責資料處理與運算。',
-      '螢幕：顯示電腦輸出的資訊，屬於輸出設備。',
-      '鍵盤：常見的輸入設備，用於輸入文字與指令。',
-      '滑鼠：常見的輸入設備，用於控制游標與操作介面。',
-      // 互動表格子單元
-      `<div id="interactive-table-frame" style='margin: 12px 0;'>
-        <div style="border:2px solid #b75e14; border-radius:12px; padding:16px; background:#fff;">
+      // 主機
+      `<div>
+        <div id="dialogue-system" style="margin-bottom:16px;">
+          <div id="dialogue-text" style="font-size:1.05em;min-height:40px;margin-bottom:12px;"></div>
+          <div id="dialogue-choices" style="display:flex;gap:12px;"></div>
+        </div>
+        主機：電腦的核心部件，負責資料處理與運算。
+      </div>`,
+      // 螢幕
+      `<div>
+        <div id="dialogue-system" style="margin-bottom:16px;">
+          <div id="dialogue-text" style="font-size:1.05em;min-height:40px;margin-bottom:12px;"></div>
+          <div id="dialogue-choices" style="display:flex;gap:12px;"></div>
+        </div>
+        螢幕：顯示電腦輸出的資訊，屬於輸出設備。
+      </div>`,
+      // 鍵盤
+      `<div>
+        <div id="dialogue-system" style="margin-bottom:16px;">
+          <div id="dialogue-text" style="font-size:1.05em;min-height:40px;margin-bottom:12px;"></div>
+          <div id="dialogue-choices" style="display:flex;gap:12px;"></div>
+        </div>
+        鍵盤：常見的輸入設備，用於輸入文字與指令。
+      </div>`,
+      // 滑鼠
+      `<div>
+        <div id="dialogue-system" style="margin-bottom:16px;">
+          <div id="dialogue-text" style="font-size:1.05em;min-height:40px;margin-bottom:12px;"></div>
+          <div id="dialogue-choices" style="display:flex;gap:12px;"></div>
+        </div>
+        滑鼠：常見的輸入設備，用於控制游標與操作介面。
+      </div>`,
+      // 互動表格
+      `<div id="interactive-table-frame" style='margin: 4px 0;'>
+        <div style="border:2px solid #b75e14; border-radius:12px; padding:4px; background:#fff;">
+          <div id="dialogue-system" style="margin-bottom:4px;">
+            <div id="dialogue-text" style="font-size:1.05em;min-height:40px;margin-bottom:-24px;"></div>
+            <div id="dialogue-choices" style="display:flex;gap:4px;"></div>
+          </div>
           <div id="drag-table-container"></div>
-          <div style="margin-top:12px;">
+          <div style="margin-top:8px;">
             <span style="font-size:0.95em;color:#888;">提示：拖曳下方裝置到正確分類框中。</span>
           </div>
         </div>
       </div>`
     ];
 
-    // 切換單元一子單元
     function showSubUnit(idx) {
       const sub = document.getElementById('subunit-content');
       if (!sub) return;
@@ -375,17 +406,143 @@
         const btn = document.getElementById('subunit-btn-' + i);
         if (btn) btn.classList.toggle('active', i === idx);
       }
+      // 對話引導
+      renderDialogueSystemForSubunit(idx);
       if (idx === 4) renderInteractiveTableV2();
     }
 
+    // 對話選擇系統 for 單元一子單元
+    function renderDialogueSystemForSubunit(idx) {
+      const dialogueSets = [
+        // 主機
+        [
+          {
+            text: "歡迎進入電腦的組成介紹。你知道主機的主要功能是什麼嗎？",
+            choices: [
+              { text: "資料處理與運算", next: 1 },
+              { text: "顯示畫面", next: 2 }
+            ]
+          },
+          {
+            text: "答對了！主機負責資料處理與運算。下一步，來看看螢幕。",
+            choices: [
+              { text: "前往螢幕", action: () => showSubUnit(1) }
+            ]
+          },
+          {
+            text: "主機主要負責資料處理與運算，顯示畫面是螢幕的功能喔！",
+            choices: [
+              { text: "再試一次", next: 0 }
+            ]
+          }
+        ],
+        // 螢幕
+        [
+          {
+            text: "螢幕屬於哪一類設備？",
+            choices: [
+              { text: "輸入設備", next: 2 },
+              { text: "輸出設備", next: 1 }
+            ]
+          },
+          {
+            text: "正確！螢幕是輸出設備。接下來認識鍵盤。",
+            choices: [
+              { text: "前往鍵盤", action: () => showSubUnit(2) }
+            ]
+          },
+          {
+            text: "螢幕是輸出設備，負責顯示資訊。",
+            choices: [
+              { text: "再試一次", next: 0 }
+            ]
+          }
+        ],
+        // 鍵盤
+        [
+          {
+            text: "鍵盤的主要用途是？",
+            choices: [
+              { text: "輸入文字與指令", next: 1 },
+              { text: "播放音樂", next: 2 }
+            ]
+          },
+          {
+            text: "答對了！鍵盤是常見的輸入設備。接下來看看滑鼠。",
+            choices: [
+              { text: "前往滑鼠", action: () => showSubUnit(3) }
+            ]
+          },
+          {
+            text: "鍵盤主要用於輸入文字與指令，播放音樂是其他設備的功能。",
+            choices: [
+              { text: "再試一次", next: 0 }
+            ]
+          }
+        ],
+        // 滑鼠
+        [
+          {
+            text: "滑鼠屬於哪一類設備？",
+            choices: [
+              { text: "輸入設備", next: 1 },
+              { text: "輸出設備", next: 2 }
+            ]
+          },
+          {
+            text: "正確！滑鼠是輸入設備。最後來挑戰互動表格吧！",
+            choices: [
+              { text: "前往互動表格", action: () => showSubUnit(4) }
+            ]
+          },
+          {
+            text: "滑鼠是輸入設備，請再試一次！",
+            choices: [
+              { text: "再試一次", next: 0 }
+            ]
+          }
+        ]
+      ];
+
+      const dialogue = dialogueSets[idx];
+      if (!dialogue) {
+        // 沒有對話內容時，將 dialogue-system 的 margin-bottom 設為 0
+        const sys = document.getElementById('dialogue-system');
+        if (sys) sys.style.marginBottom = '0';
+        return;
+      }
+      const textDiv = document.getElementById('dialogue-text');
+      const choicesDiv = document.getElementById('dialogue-choices');
+      let dialogueIdx = 0;
+
+      function renderDialogue(idx) {
+        const node = dialogue[idx];
+        textDiv.textContent = node.text;
+        choicesDiv.innerHTML = '';
+        node.choices.forEach(choice => {
+          const btn = document.createElement('button');
+          btn.textContent = choice.text;
+          btn.className = 'subunit-btn';
+          btn.onclick = () => {
+            if (typeof choice.action === 'function') {
+              choice.action();
+            } else if (typeof choice.next === 'number') {
+              renderDialogue(choice.next);
+            }
+          };
+          choicesDiv.appendChild(btn);
+        });
+      }
+      renderDialogue(dialogueIdx);
+    }
     // 新版互動式表格JS
     function renderInteractiveTableV2() {
       const container = document.getElementById('drag-table-container');
       if (!container) return;
       container.innerHTML = `
-        <div style="display: flex; align-items: flex-start; gap: 24px;">
-          <div id="table-frame-move" style="display:inline-block; border:2px dashed #b75e14; border-radius:10px; padding:12px; background:#fff; cursor:move;">
-            <table style="border-collapse:collapse;width:100%;max-width:420px;">
+        <div style="display: flex; align-items: flex-start; gap: 24px; position: relative; margin-top:0; padding-top:0;">
+          <div id="table-frame-move" style="display:inline-block; border:2px dashed #b75e14; border-radius:10px; padding:12px; background:#fff; cursor:move; margin-top:0;">
+            <table style="border-collapse:collapse;width:100%;max-width:420px;margin-top:0;">
               <tr>
             <th style="border:1px solid #b75e14;padding:8px 12px;background:#ffe5c2;">滑鼠</th>
             <th style="border:1px solid #b75e14;padding:8px 12px;background:#ffe5c2;">鍵盤</th>
@@ -408,7 +565,7 @@
               </tr>
             </table>
             </div>
-            <div style="display:flex;flex-direction:column;gap:4px;min-width:40px;">
+            <div style="display:flex;flex-direction:column;gap:4px;min-width:40px;margin-top:0;">
             <div class="draggable-cell" draggable="true" data-type="mouse" style="border:1px solid #888;padding:6px 8px;border-radius:8px;cursor:grab;background:#f7f7f7;min-width:40px;text-align:center;">滑鼠</div>
             <div class="draggable-cell" draggable="true" data-type="keyboard" style="border:1px solid #888;padding:6px 8px;border-radius:8px;cursor:grab;background:#f7f7f7;min-width:40px;text-align:center;">鍵盤</div>
             <div class="draggable-cell" draggable="true" data-type="input" style="border:1px solid #888;padding:6px 8px;border-radius:8px;cursor:grab;background:#f7f7f7;min-width:40px;text-align:center;">輸入設備</div>
@@ -488,53 +645,6 @@
         }
       });
     }
-      // 挑戰小視窗
-    function showChallengeModal() {
-      // 聚焦遮罩
-      let mask = document.getElementById('challenge-mask');
-      if (!mask) {
-        mask = document.createElement('div');
-        mask.id = 'challenge-mask';
-        mask.style.position = 'fixed';
-        mask.style.left = '0';
-        mask.style.top = '0';
-        mask.style.width = '100vw';
-        mask.style.height = '100vh';
-        mask.style.background = 'rgba(0,0,0,0.35)';
-        mask.style.zIndex = '9998';
-        mask.onclick = closeChallengeModal;
-        document.body.appendChild(mask);
-      } else {
-        mask.style.display = '';
-      }
-      document.getElementById('challenge-modal').style.display = '';
-    }
-    function closeChallengeModal() {
-      document.getElementById('challenge-modal').style.display = 'none';
-      let mask = document.getElementById('challenge-mask');
-      if (mask) mask.style.display = 'none';
-    }
-
-    function openAIWebchat() {
-      // 切換 webchat 顯示/隱藏
-      const webchatDiv = document.getElementById('webchat');
-      if (!webchatDiv) return;
-      if (webchatDiv.style.display === 'none' || webchatDiv.style.display === '') {
-        webchatDiv.style.display = '';
-        // 僅在 webchat ready 時開啟
-        if (window.botpress && typeof window.botpress.open === 'function') {
-          window.botpress.open();
-        }
-        webchatDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } else {
-        webchatDiv.style.display = 'none';
-        // 可選：關閉 webchat 視窗（如有 close 方法）
-        if (window.botpress && typeof window.botpress.close === 'function') {
-          window.botpress.close();
-        }
-      }
-    }
-
   </script>
   <!-- Botpress 初始化腳本移到這裡 -->
   <script>

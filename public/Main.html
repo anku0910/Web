@@ -159,10 +159,18 @@
 
   <!-- 挑戰小視窗 Modal -->
   <div id="challenge-modal" style="display:none; position: fixed; left: 50%; top: 60%; transform: translate(-50%, 0); min-width: 320px; min-height: 120px; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); z-index: 9999; padding: 24px 32px; text-align: center;">
-    <h3 style="margin-bottom: 8px;position: absolute;">挑戰！</h3>    
+    <h3 style="margin-bottom: 8px;position: absolute; top:16px">挑戰！</h3>    
     <div class="progress-bar">
-      <p style="position: relative; top: -16px; z-index: 2;">這裡是挑戰視窗內容。</p>
-      <div class="progress-bar-inner" style="width:100%"></div>
+  <!-- 挑戰條-->
+      <div class="progress-bar-inner" style="position: relative; width:100%; top: -16px; " >
+      <p style="position: relative; top: -0px; z-index: 2;color: #fff;left: -25%;">完成一個課程。</p>
+      </div>
+    </div>
+    <div class="progress-bar" style="margin-top:auto; ">
+  <!-- 挑戰條-->
+      <div class="progress-bar-inner" style="position: relative; width:100%; top: -16px;" >
+      <p style="position: relative; top: -0px; z-index: 2;color: #fff;left: -25%;">完成三個課程。</p>
+      </div>
     </div>
     <button onclick="closeChallengeModal()" style="margin-top: 0px;" class="lesson-btn">關閉</button>
   </div>

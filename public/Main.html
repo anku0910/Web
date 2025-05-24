@@ -64,6 +64,33 @@
       transition: width 0.4s;
     }
 
+    .unit-btns-wrapper {
+      display: flex;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .unit-btn {
+      min-width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: #bbb;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      outline: none;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .unit-btn.active, .unit-btn:focus {
+      background: #b75e14;
+      transform: scale(1.08);
+    }
     /* 其他現有樣式保持不變 */
   </style>
 </head>
@@ -79,7 +106,7 @@
       <div class="dark-frame" style="visibility:hidden"></div>
       <button class="nav-btn" onclick="showPage('page-home')">首頁</button>
       <button class="nav-btn" onclick="showPage('page-courses')">我的課程</button>
-      <button class="nav-btn" onclick="showPage('page-records')">學習紀錄</button>
+      <button class="nav-btn" onclick="showPage('page-records')">學習紀錄</button>`X
       <button class="nav-btn" onclick="showPage('page-profile')">個人檔案</button>
       <div class="dark-frame"></div>
       <button class="nav-btn2"onclick="showPage('page-mission')">任務</button>
@@ -166,7 +193,7 @@
               </div>
             </div>
           </div>
-          <div id="lesson-units" class="wrapper" style="margin: 20px 0;"></div>
+          <div id="lesson-units" class="unit-btns-wrapper"></div>
           <div class="unit-content-frame" style="background: #fff; border-radius: 8px; padding: 18px 24px; margin-bottom: 20px;">
             <h3 id="unit-title" style="color: #b75e14; font-size: 1.2rem; margin-bottom: 8px;">單元標題</h3>
             <div id="unit-content" style="color: #333; font-size: 1rem;">單元內容會顯示在這裡。</div>
@@ -228,7 +255,15 @@
         desc: '介紹個人電腦的基本架構與組成，包含桌面操作、輸入輸出設備、檔案類型、資料傳輸速度基本功能等。適合無基礎學員，建立使用電腦的基本技能和知識。',
         units: [
           { title: '單元一：電腦的組成', content: '本單元介紹電腦的基本組成，包括主機、螢幕、鍵盤、滑鼠等。' },
-          { title: '單元二：桌面操作', content: '學習如何操作桌面、開啟程式、管理視窗。' }
+          { title: '單元二：桌面操作', content: '學習如何操作桌面、開啟程式、管理視窗。' },
+          { title: '單元三：輸入輸出設備', content: '認識各種輸入與輸出設備，例如滑鼠、鍵盤、印表機、螢幕等。' },
+          { title: '單元四：檔案類型', content: '了解常見的檔案類型與副檔名，如何辨識與管理。' },
+          { title: '單元五：多工處理', content: '介紹多工處理的基本概念與在作業系統中的應用。' },
+          { title: '單元六：資料傳輸速度', content: '說明資料傳輸速度的單位與影響因素。' },
+          { title: '單元七：電腦安全', content: '基礎電腦安全知識與防護措施。' },
+          { title: '單元八：軟體安裝', content: '學習如何安裝與移除應用程式。' },
+          { title: '單元九：網路基礎', content: '簡介網路連線與網路設定。' },
+          { title: '單元十：常見問題排解', content: '遇到電腦問題時的基本排解方法。' }
         ]
       },
       'os-file': {
@@ -236,7 +271,15 @@
         desc: '介紹不同作業系統的架構與功能、使用者權限，學習如何管理檔案與資料夾，理解檔案系統的運作原理，並實務操作常用的檔案管理工具。',
         units: [
           { title: '單元一：作業系統介紹', content: '本單元說明作業系統的種類與基本功能。' },
-          { title: '單元二：檔案與資料夾管理', content: '學習如何建立、刪除、移動檔案與資料夾。' }
+          { title: '單元二：檔案與資料夾管理', content: '學習如何建立、刪除、移動檔案與資料夾。' },
+          { title: '單元三：使用者權限', content: '了解作業系統中的使用者權限與安全性設定。' },
+          { title: '單元四：檔案系統原理', content: '認識檔案系統的運作方式與常見格式。' },
+          { title: '單元五：實用檔案管理工具', content: '介紹常用的檔案管理工具與操作技巧。' },
+          { title: '單元六：備份與還原', content: '學習如何備份與還原檔案。' },
+          { title: '單元七：磁碟管理', content: '磁碟分割、格式化與管理。' },
+          { title: '單元八：系統設定', content: '作業系統常見設定與調整。' },
+          { title: '單元九：資源監控', content: '如何監控系統資源與效能。' },
+          { title: '單元十：常見問題排解', content: '作業系統與檔案管理常見問題的排解方法。' }
         ]
       }
       // 你可以繼續新增更多課程資料
@@ -251,13 +294,15 @@
       if (pageId === 'page-lesson' && lessonId && lessons[lessonId]) {
         document.getElementById('lesson-title').textContent = lessons[lessonId].title;
         document.getElementById('lesson-desc').textContent = lessons[lessonId].desc;
-        // 動態產生單元卡片
+        // 動態產生單元小按鈕（僅顯示一、二、三...）
+        const numToZh = ['一','二','三','四','五','六','七','八','九','十'];
         let unitListHtml = '';
         lessons[lessonId].units.forEach((unit, idx) => {
-          unitListHtml += `<div class="card" onclick="showUnit('${lessonId}', ${idx})">${unit.title}</div>`;
+          const zh = numToZh[idx] || (idx+1);
+          unitListHtml += `<button class="unit-btn" id="unit-btn-${idx}" onclick="showUnit('${lessonId}', ${idx})">${zh}</button>`;
         });
         document.getElementById('lesson-units').innerHTML = unitListHtml;
-        // 預設顯示第一個單元內容
+        // 預設顯示第一個單元內容並高亮
         showUnit(lessonId, 0);
       }
     }
@@ -266,6 +311,9 @@
       const unit = lessons[lessonId].units[unitIdx];
       document.getElementById('unit-title').textContent = unit.title;
       document.getElementById('unit-content').textContent = unit.content;
+      // 高亮目前按鈕
+      const btns = document.querySelectorAll('.unit-btn');
+      btns.forEach((btn, idx) => btn.classList.toggle('active', idx === unitIdx));
     }
       // 挑戰小視窗
     function showChallengeModal() {

@@ -351,7 +351,7 @@ body {
   box-shadow: 2px 0 8px #e08a3d44 inset;
 }
 
-.rightbar .unit-btn {
+.rightbar .unit-btn1 {
   z-index: 2;
   background: #fff;
   color: #e08a3d;
@@ -367,7 +367,7 @@ body {
   letter-spacing: 2px;
 }
 
-.rightbar .unit-btn:hover {
+.rightbar .unit-btn1:hover {
   background: #ffe0b2;
 }
 
